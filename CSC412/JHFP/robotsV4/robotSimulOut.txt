@@ -1,0 +1,41 @@
+Rows 16, Columns 20, Boxes 3, Doors 3
+
+Door 1: Row 0, Column 7
+Door 2: Row 1, Column 16
+Door 3: Row 8, Column 0
+
+Box 1: Row 10, Column 11
+Box 2: Row 14, Column 8
+Box 3: Row 11, Column 4
+
+Robot 1: Row 8, Column 4, Door 0
+Robot 2: Row 7, Column 5, Door 1
+Robot 3: Row 15, Column 9, Door 2
+
+robot 2 move S
+robot 1 move N
+robot 0 move N
+robot 2 move S
+robot 1 move N
+robot 0 move N
+robot 2 move S
+robot 1 move N
+robot 2 move W
+robot 1 move N
+robot 2 move W
+robot 1 move N
+robot 2 move W
+robot 0 became deadlocked with robot 0
+robot 1 move N
+robot 2 move W
+robot 1 move N
+robot 2 move W
+robot 1 move N
+robot 1 move E
+robot 1 move E
+robot 1 move E
+robot 2 became deadlocked with robot 2
+robot 1 push S
+robot 1 push S
+robot 1 push S
+robot 1 push S
