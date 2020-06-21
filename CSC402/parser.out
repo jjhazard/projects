@@ -1,0 +1,3995 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> stmt_list
+Rule 2     stmt_list -> stmt stmt_list
+Rule 3     stmt_list -> empty
+Rule 4     stmt -> VOID_TYPE ID ( opt_formal_args ) stmt
+Rule 5     stmt -> data_type ID ( opt_formal_args ) stmt
+Rule 6     stmt -> data_type ID opt_init opt_semi
+Rule 7     stmt -> storable = exp opt_semi
+Rule 8     stmt -> PRINT exp opt_semi
+Rule 9     stmt -> ID ( opt_actual_args ) opt_semi
+Rule 10    stmt -> RETURN opt_exp opt_semi
+Rule 11    stmt -> WHILE ( exp ) stmt
+Rule 12    stmt -> IF ( exp ) stmt opt_else
+Rule 13    stmt -> { stmt_list }
+Rule 14    data_type -> primitive_type
+Rule 15    data_type -> primitive_type [ INTEGER ]
+Rule 16    primitive_type -> INTEGER_TYPE
+Rule 17    primitive_type -> DOUBLE_TYPE
+Rule 18    primitive_type -> STRING_TYPE
+Rule 19    opt_formal_args -> formal_args
+Rule 20    opt_formal_args -> empty
+Rule 21    formal_args -> data_type ID , formal_args
+Rule 22    formal_args -> data_type ID
+Rule 23    opt_init -> = exp
+Rule 24    opt_init -> = { exp_list }
+Rule 25    opt_init -> empty
+Rule 26    exp_list -> exp , exp_list
+Rule 27    exp_list -> exp
+Rule 28    opt_actual_args -> actual_args
+Rule 29    opt_actual_args -> empty
+Rule 30    actual_args -> exp , actual_args
+Rule 31    actual_args -> exp
+Rule 32    opt_exp -> exp
+Rule 33    opt_exp -> empty
+Rule 34    opt_else -> ELSE stmt
+Rule 35    opt_else -> empty
+Rule 36    exp -> exp + exp
+Rule 37    exp -> exp - exp
+Rule 38    exp -> exp * exp
+Rule 39    exp -> exp / exp
+Rule 40    exp -> exp EQ exp
+Rule 41    exp -> exp LE exp
+Rule 42    exp -> exp GE exp
+Rule 43    exp -> exp LT exp
+Rule 44    exp -> exp GT exp
+Rule 45    exp -> exp NE exp
+Rule 46    exp -> exp MOD exp
+Rule 47    exp -> exp AND exp
+Rule 48    exp -> exp OR exp
+Rule 49    exp -> INTEGER
+Rule 50    exp -> DOUBLE
+Rule 51    exp -> STRING
+Rule 52    exp -> storable
+Rule 53    exp -> ID ( opt_actual_args )
+Rule 54    exp -> ( exp )
+Rule 55    exp -> - exp
+Rule 56    exp -> NOT exp
+Rule 57    storable -> ID
+Rule 58    storable -> ID [ exp ]
+Rule 59    opt_semi -> ;
+Rule 60    opt_semi -> empty
+Rule 61    empty -> <empty>
+
+Terminals, with rules where they appear
+
+(                    : 4 5 9 11 12 53 54
+)                    : 4 5 9 11 12 53 54
+*                    : 38
++                    : 36
+,                    : 21 26 30
+-                    : 37 55
+/                    : 39
+;                    : 59
+=                    : 7 23 24
+AND                  : 47
+DOUBLE               : 50
+DOUBLE_TYPE          : 17
+ELSE                 : 34
+EQ                   : 40
+GE                   : 42
+GT                   : 44
+ID                   : 4 5 6 9 21 22 53 57 58
+IF                   : 12
+INTEGER              : 15 49
+INTEGER_TYPE         : 16
+LE                   : 41
+LT                   : 43
+MOD                  : 46
+NE                   : 45
+NOT                  : 56
+OR                   : 48
+PRINT                : 8
+RETURN               : 10
+STRING               : 51
+STRING_TYPE          : 18
+VOID_TYPE            : 4
+WHILE                : 11
+[                    : 15 58
+]                    : 15 58
+error                : 
+{                    : 13 24
+}                    : 13 24
+
+Nonterminals, with rules where they appear
+
+actual_args          : 28 30
+data_type            : 5 6 21 22
+empty                : 3 20 25 29 33 35 60
+exp                  : 7 8 11 12 23 26 27 30 31 32 36 36 37 37 38 38 39 39 40 40 41 41 42 42 43 43 44 44 45 45 46 46 47 47 48 48 54 55 56 58
+exp_list             : 24 26
+formal_args          : 19 21
+opt_actual_args      : 9 53
+opt_else             : 12
+opt_exp              : 10
+opt_formal_args      : 4 5
+opt_init             : 6
+opt_semi             : 6 7 8 9 10
+primitive_type       : 14 15
+program              : 0
+stmt                 : 2 4 5 11 12 34
+stmt_list            : 1 2 13
+storable             : 7 52
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . stmt_list
+    (2) stmt_list -> . stmt stmt_list
+    (3) stmt_list -> . empty
+    (4) stmt -> . VOID_TYPE ID ( opt_formal_args ) stmt
+    (5) stmt -> . data_type ID ( opt_formal_args ) stmt
+    (6) stmt -> . data_type ID opt_init opt_semi
+    (7) stmt -> . storable = exp opt_semi
+    (8) stmt -> . PRINT exp opt_semi
+    (9) stmt -> . ID ( opt_actual_args ) opt_semi
+    (10) stmt -> . RETURN opt_exp opt_semi
+    (11) stmt -> . WHILE ( exp ) stmt
+    (12) stmt -> . IF ( exp ) stmt opt_else
+    (13) stmt -> . { stmt_list }
+    (61) empty -> .
+    (14) data_type -> . primitive_type
+    (15) data_type -> . primitive_type [ INTEGER ]
+    (57) storable -> . ID
+    (58) storable -> . ID [ exp ]
+    (16) primitive_type -> . INTEGER_TYPE
+    (17) primitive_type -> . DOUBLE_TYPE
+    (18) primitive_type -> . STRING_TYPE
+
+    VOID_TYPE       shift and go to state 5
+    PRINT           shift and go to state 9
+    ID              shift and go to state 6
+    RETURN          shift and go to state 10
+    WHILE           shift and go to state 11
+    IF              shift and go to state 12
+    {               shift and go to state 13
+    $end            reduce using rule 61 (empty -> .)
+    INTEGER_TYPE    shift and go to state 15
+    DOUBLE_TYPE     shift and go to state 16
+    STRING_TYPE     shift and go to state 17
+
+    program                        shift and go to state 1
+    stmt_list                      shift and go to state 2
+    stmt                           shift and go to state 3
+    empty                          shift and go to state 4
+    data_type                      shift and go to state 7
+    storable                       shift and go to state 8
+    primitive_type                 shift and go to state 14
+
+state 1
+
+    (0) S' -> program .
+
+
+
+state 2
+
+    (1) program -> stmt_list .
+
+    $end            reduce using rule 1 (program -> stmt_list .)
+
+
+state 3
+
+    (2) stmt_list -> stmt . stmt_list
+    (2) stmt_list -> . stmt stmt_list
+    (3) stmt_list -> . empty
+    (4) stmt -> . VOID_TYPE ID ( opt_formal_args ) stmt
+    (5) stmt -> . data_type ID ( opt_formal_args ) stmt
+    (6) stmt -> . data_type ID opt_init opt_semi
+    (7) stmt -> . storable = exp opt_semi
+    (8) stmt -> . PRINT exp opt_semi
+    (9) stmt -> . ID ( opt_actual_args ) opt_semi
+    (10) stmt -> . RETURN opt_exp opt_semi
+    (11) stmt -> . WHILE ( exp ) stmt
+    (12) stmt -> . IF ( exp ) stmt opt_else
+    (13) stmt -> . { stmt_list }
+    (61) empty -> .
+    (14) data_type -> . primitive_type
+    (15) data_type -> . primitive_type [ INTEGER ]
+    (57) storable -> . ID
+    (58) storable -> . ID [ exp ]
+    (16) primitive_type -> . INTEGER_TYPE
+    (17) primitive_type -> . DOUBLE_TYPE
+    (18) primitive_type -> . STRING_TYPE
+
+    VOID_TYPE       shift and go to state 5
+    PRINT           shift and go to state 9
+    ID              shift and go to state 6
+    RETURN          shift and go to state 10
+    WHILE           shift and go to state 11
+    IF              shift and go to state 12
+    {               shift and go to state 13
+    $end            reduce using rule 61 (empty -> .)
+    }               reduce using rule 61 (empty -> .)
+    INTEGER_TYPE    shift and go to state 15
+    DOUBLE_TYPE     shift and go to state 16
+    STRING_TYPE     shift and go to state 17
+
+    stmt                           shift and go to state 3
+    stmt_list                      shift and go to state 18
+    empty                          shift and go to state 4
+    data_type                      shift and go to state 7
+    storable                       shift and go to state 8
+    primitive_type                 shift and go to state 14
+
+state 4
+
+    (3) stmt_list -> empty .
+
+    $end            reduce using rule 3 (stmt_list -> empty .)
+    }               reduce using rule 3 (stmt_list -> empty .)
+
+
+state 5
+
+    (4) stmt -> VOID_TYPE . ID ( opt_formal_args ) stmt
+
+    ID              shift and go to state 19
+
+
+state 6
+
+    (9) stmt -> ID . ( opt_actual_args ) opt_semi
+    (57) storable -> ID .
+    (58) storable -> ID . [ exp ]
+
+    (               shift and go to state 20
+    =               reduce using rule 57 (storable -> ID .)
+    [               shift and go to state 21
+
+
+state 7
+
+    (5) stmt -> data_type . ID ( opt_formal_args ) stmt
+    (6) stmt -> data_type . ID opt_init opt_semi
+
+    ID              shift and go to state 22
+
+
+state 8
+
+    (7) stmt -> storable . = exp opt_semi
+
+    =               shift and go to state 23
+
+
+state 9
+
+    (8) stmt -> PRINT . exp opt_semi
+    (36) exp -> . exp + exp
+    (37) exp -> . exp - exp
+    (38) exp -> . exp * exp
+    (39) exp -> . exp / exp
+    (40) exp -> . exp EQ exp
+    (41) exp -> . exp LE exp
+    (42) exp -> . exp GE exp
+    (43) exp -> . exp LT exp
+    (44) exp -> . exp GT exp
+    (45) exp -> . exp NE exp
+    (46) exp -> . exp MOD exp
+    (47) exp -> . exp AND exp
+    (48) exp -> . exp OR exp
+    (49) exp -> . INTEGER
+    (50) exp -> . DOUBLE
+    (51) exp -> . STRING
+    (52) exp -> . storable
+    (53) exp -> . ID ( opt_actual_args )
+    (54) exp -> . ( exp )
+    (55) exp -> . - exp
+    (56) exp -> . NOT exp
+    (57) storable -> . ID
+    (58) storable -> . ID [ exp ]
+
+    INTEGER         shift and go to state 26
+    DOUBLE          shift and go to state 27
+    STRING          shift and go to state 28
+    ID              shift and go to state 30
+    (               shift and go to state 31
+    -               shift and go to state 25
+    NOT             shift and go to state 32
+
+    exp                            shift and go to state 24
+    storable                       shift and go to state 29
+
+state 10
+
+    (10) stmt -> RETURN . opt_exp opt_semi
+    (32) opt_exp -> . exp
+    (33) opt_exp -> . empty
+    (36) exp -> . exp + exp
+    (37) exp -> . exp - exp
+    (38) exp -> . exp * exp
+    (39) exp -> . exp / exp
+    (40) exp -> . exp EQ exp
+    (41) exp -> . exp LE exp
+    (42) exp -> . exp GE exp
+    (43) exp -> . exp LT exp
+    (44) exp -> . exp GT exp
+    (45) exp -> . exp NE exp
+    (46) exp -> . exp MOD exp
+    (47) exp -> . exp AND exp
+    (48) exp -> . exp OR exp
+    (49) exp -> . INTEGER
+    (50) exp -> . DOUBLE
+    (51) exp -> . STRING
+    (52) exp -> . storable
+    (53) exp -> . ID ( opt_actual_args )
+    (54) exp -> . ( exp )
+    (55) exp -> . - exp
+    (56) exp -> . NOT exp
+    (61) empty -> .
+    (57) storable -> . ID
+    (58) storable -> . ID [ exp ]
+
+  ! shift/reduce conflict for ID resolved as shift
+    INTEGER         shift and go to state 26
+    DOUBLE          shift and go to state 27
+    STRING          shift and go to state 28
+    ID              shift and go to state 30
+    (               shift and go to state 31
+    -               shift and go to state 25
+    NOT             shift and go to state 32
+    ;               reduce using rule 61 (empty -> .)
+    VOID_TYPE       reduce using rule 61 (empty -> .)
+    PRINT           reduce using rule 61 (empty -> .)
+    RETURN          reduce using rule 61 (empty -> .)
+    WHILE           reduce using rule 61 (empty -> .)
+    IF              reduce using rule 61 (empty -> .)
+    {               reduce using rule 61 (empty -> .)
+    INTEGER_TYPE    reduce using rule 61 (empty -> .)
+    DOUBLE_TYPE     reduce using rule 61 (empty -> .)
+    STRING_TYPE     reduce using rule 61 (empty -> .)
+    $end            reduce using rule 61 (empty -> .)
+    }               reduce using rule 61 (empty -> .)
+    ELSE            reduce using rule 61 (empty -> .)
+
+  ! ID              [ reduce using rule 61 (empty -> .) ]
+
+    opt_exp                        shift and go to state 33
+    exp                            shift and go to state 34
+    empty                          shift and go to state 35
+    storable                       shift and go to state 29
+
+state 11
+
+    (11) stmt -> WHILE . ( exp ) stmt
+
+    (               shift and go to state 36
+
+
+state 12
+
+    (12) stmt -> IF . ( exp ) stmt opt_else
+
+    (               shift and go to state 37
+
+
+state 13
+
+    (13) stmt -> { . stmt_list }
+    (2) stmt_list -> . stmt stmt_list
+    (3) stmt_list -> . empty
+    (4) stmt -> . VOID_TYPE ID ( opt_formal_args ) stmt
+    (5) stmt -> . data_type ID ( opt_formal_args ) stmt
+    (6) stmt -> . data_type ID opt_init opt_semi
+    (7) stmt -> . storable = exp opt_semi
+    (8) stmt -> . PRINT exp opt_semi
+    (9) stmt -> . ID ( opt_actual_args ) opt_semi
+    (10) stmt -> . RETURN opt_exp opt_semi
+    (11) stmt -> . WHILE ( exp ) stmt
+    (12) stmt -> . IF ( exp ) stmt opt_else
+    (13) stmt -> . { stmt_list }
+    (61) empty -> .
+    (14) data_type -> . primitive_type
+    (15) data_type -> . primitive_type [ INTEGER ]
+    (57) storable -> . ID
+    (58) storable -> . ID [ exp ]
+    (16) primitive_type -> . INTEGER_TYPE
+    (17) primitive_type -> . DOUBLE_TYPE
+    (18) primitive_type -> . STRING_TYPE
+
+    VOID_TYPE       shift and go to state 5
+    PRINT           shift and go to state 9
+    ID              shift and go to state 6
+    RETURN          shift and go to state 10
+    WHILE           shift and go to state 11
+    IF              shift and go to state 12
+    {               shift and go to state 13
+    }               reduce using rule 61 (empty -> .)
+    INTEGER_TYPE    shift and go to state 15
+    DOUBLE_TYPE     shift and go to state 16
+    STRING_TYPE     shift and go to state 17
+
+    stmt_list                      shift and go to state 38
+    stmt                           shift and go to state 3
+    empty                          shift and go to state 4
+    data_type                      shift and go to state 7
+    storable                       shift and go to state 8
+    primitive_type                 shift and go to state 14
+
+state 14
+
+    (14) data_type -> primitive_type .
+    (15) data_type -> primitive_type . [ INTEGER ]
+
+    ID              reduce using rule 14 (data_type -> primitive_type .)
+    [               shift and go to state 39
+
+
+state 15
+
+    (16) primitive_type -> INTEGER_TYPE .
+
+    [               reduce using rule 16 (primitive_type -> INTEGER_TYPE .)
+    ID              reduce using rule 16 (primitive_type -> INTEGER_TYPE .)
+
+
+state 16
+
+    (17) primitive_type -> DOUBLE_TYPE .
+
+    [               reduce using rule 17 (primitive_type -> DOUBLE_TYPE .)
+    ID              reduce using rule 17 (primitive_type -> DOUBLE_TYPE .)
+
+
+state 17
+
+    (18) primitive_type -> STRING_TYPE .
+
+    [               reduce using rule 18 (primitive_type -> STRING_TYPE .)
+    ID              reduce using rule 18 (primitive_type -> STRING_TYPE .)
+
+
+state 18
+
+    (2) stmt_list -> stmt stmt_list .
+
+    $end            reduce using rule 2 (stmt_list -> stmt stmt_list .)
+    }               reduce using rule 2 (stmt_list -> stmt stmt_list .)
+
+
+state 19
+
+    (4) stmt -> VOID_TYPE ID . ( opt_formal_args ) stmt
+
+    (               shift and go to state 40
+
+
+state 20
+
+    (9) stmt -> ID ( . opt_actual_args ) opt_semi
+    (28) opt_actual_args -> . actual_args
+    (29) opt_actual_args -> . empty
+    (30) actual_args -> . exp , actual_args
+    (31) actual_args -> . exp
+    (61) empty -> .
+    (36) exp -> . exp + exp
+    (37) exp -> . exp - exp
+    (38) exp -> . exp * exp
+    (39) exp -> . exp / exp
+    (40) exp -> . exp EQ exp
+    (41) exp -> . exp LE exp
+    (42) exp -> . exp GE exp
+    (43) exp -> . exp LT exp
+    (44) exp -> . exp GT exp
+    (45) exp -> . exp NE exp
+    (46) exp -> . exp MOD exp
+    (47) exp -> . exp AND exp
+    (48) exp -> . exp OR exp
+    (49) exp -> . INTEGER
+    (50) exp -> . DOUBLE
+    (51) exp -> . STRING
+    (52) exp -> . storable
+    (53) exp -> . ID ( opt_actual_args )
+    (54) exp -> . ( exp )
+    (55) exp -> . - exp
+    (56) exp -> . NOT exp
+    (57) storable -> . ID
+    (58) storable -> . ID [ exp ]
+
+    )               reduce using rule 61 (empty -> .)
+    INTEGER         shift and go to state 26
+    DOUBLE          shift and go to state 27
+    STRING          shift and go to state 28
+    ID              shift and go to state 30
+    (               shift and go to state 31
+    -               shift and go to state 25
+    NOT             shift and go to state 32
+
+    opt_actual_args                shift and go to state 41
+    actual_args                    shift and go to state 42
+    empty                          shift and go to state 43
+    exp                            shift and go to state 44
+    storable                       shift and go to state 29
+
+state 21
+
+    (58) storable -> ID [ . exp ]
+    (36) exp -> . exp + exp
+    (37) exp -> . exp - exp
+    (38) exp -> . exp * exp
+    (39) exp -> . exp / exp
+    (40) exp -> . exp EQ exp
+    (41) exp -> . exp LE exp
+    (42) exp -> . exp GE exp
+    (43) exp -> . exp LT exp
+    (44) exp -> . exp GT exp
+    (45) exp -> . exp NE exp
+    (46) exp -> . exp MOD exp
+    (47) exp -> . exp AND exp
+    (48) exp -> . exp OR exp
+    (49) exp -> . INTEGER
+    (50) exp -> . DOUBLE
+    (51) exp -> . STRING
+    (52) exp -> . storable
+    (53) exp -> . ID ( opt_actual_args )
+    (54) exp -> . ( exp )
+    (55) exp -> . - exp
+    (56) exp -> . NOT exp
+    (57) storable -> . ID
+    (58) storable -> . ID [ exp ]
+
+    INTEGER         shift and go to state 26
+    DOUBLE          shift and go to state 27
+    STRING          shift and go to state 28
+    ID              shift and go to state 30
+    (               shift and go to state 31
+    -               shift and go to state 25
+    NOT             shift and go to state 32
+
+    exp                            shift and go to state 45
+    storable                       shift and go to state 29
+
+state 22
+
+    (5) stmt -> data_type ID . ( opt_formal_args ) stmt
+    (6) stmt -> data_type ID . opt_init opt_semi
+    (23) opt_init -> . = exp
+    (24) opt_init -> . = { exp_list }
+    (25) opt_init -> . empty
+    (61) empty -> .
+
+    (               shift and go to state 46
+    =               shift and go to state 48
+    ;               reduce using rule 61 (empty -> .)
+    VOID_TYPE       reduce using rule 61 (empty -> .)
+    PRINT           reduce using rule 61 (empty -> .)
+    ID              reduce using rule 61 (empty -> .)
+    RETURN          reduce using rule 61 (empty -> .)
+    WHILE           reduce using rule 61 (empty -> .)
+    IF              reduce using rule 61 (empty -> .)
+    {               reduce using rule 61 (empty -> .)
+    INTEGER_TYPE    reduce using rule 61 (empty -> .)
+    DOUBLE_TYPE     reduce using rule 61 (empty -> .)
+    STRING_TYPE     reduce using rule 61 (empty -> .)
+    $end            reduce using rule 61 (empty -> .)
+    }               reduce using rule 61 (empty -> .)
+    ELSE            reduce using rule 61 (empty -> .)
+
+    opt_init                       shift and go to state 47
+    empty                          shift and go to state 49
+
+state 23
+
+    (7) stmt -> storable = . exp opt_semi
+    (36) exp -> . exp + exp
+    (37) exp -> . exp - exp
+    (38) exp -> . exp * exp
+    (39) exp -> . exp / exp
+    (40) exp -> . exp EQ exp
+    (41) exp -> . exp LE exp
+    (42) exp -> . exp GE exp
+    (43) exp -> . exp LT exp
+    (44) exp -> . exp GT exp
+    (45) exp -> . exp NE exp
+    (46) exp -> . exp MOD exp
+    (47) exp -> . exp AND exp
+    (48) exp -> . exp OR exp
+    (49) exp -> . INTEGER
+    (50) exp -> . DOUBLE
+    (51) exp -> . STRING
+    (52) exp -> . storable
+    (53) exp -> . ID ( opt_actual_args )
+    (54) exp -> . ( exp )
+    (55) exp -> . - exp
+    (56) exp -> . NOT exp
+    (57) storable -> . ID
+    (58) storable -> . ID [ exp ]
+
+    INTEGER         shift and go to state 26
+    DOUBLE          shift and go to state 27
+    STRING          shift and go to state 28
+    ID              shift and go to state 30
+    (               shift and go to state 31
+    -               shift and go to state 25
+    NOT             shift and go to state 32
+
+    storable                       shift and go to state 29
+    exp                            shift and go to state 50
+
+state 24
+
+    (8) stmt -> PRINT exp . opt_semi
+    (36) exp -> exp . + exp
+    (37) exp -> exp . - exp
+    (38) exp -> exp . * exp
+    (39) exp -> exp . / exp
+    (40) exp -> exp . EQ exp
+    (41) exp -> exp . LE exp
+    (42) exp -> exp . GE exp
+    (43) exp -> exp . LT exp
+    (44) exp -> exp . GT exp
+    (45) exp -> exp . NE exp
+    (46) exp -> exp . MOD exp
+    (47) exp -> exp . AND exp
+    (48) exp -> exp . OR exp
+    (59) opt_semi -> . ;
+    (60) opt_semi -> . empty
+    (61) empty -> .
+
+    +               shift and go to state 52
+    -               shift and go to state 53
+    *               shift and go to state 54
+    /               shift and go to state 55
+    EQ              shift and go to state 56
+    LE              shift and go to state 57
+    GE              shift and go to state 58
+    LT              shift and go to state 59
+    GT              shift and go to state 60
+    NE              shift and go to state 61
+    MOD             shift and go to state 62
+    AND             shift and go to state 63
+    OR              shift and go to state 64
+    ;               shift and go to state 65
+    VOID_TYPE       reduce using rule 61 (empty -> .)
+    PRINT           reduce using rule 61 (empty -> .)
+    ID              reduce using rule 61 (empty -> .)
+    RETURN          reduce using rule 61 (empty -> .)
+    WHILE           reduce using rule 61 (empty -> .)
+    IF              reduce using rule 61 (empty -> .)
+    {               reduce using rule 61 (empty -> .)
+    INTEGER_TYPE    reduce using rule 61 (empty -> .)
+    DOUBLE_TYPE     reduce using rule 61 (empty -> .)
+    STRING_TYPE     reduce using rule 61 (empty -> .)
+    $end            reduce using rule 61 (empty -> .)
+    }               reduce using rule 61 (empty -> .)
+    ELSE            reduce using rule 61 (empty -> .)
+
+    opt_semi                       shift and go to state 51
+    empty                          shift and go to state 66
+
+state 25
+
+    (55) exp -> - . exp
+    (36) exp -> . exp + exp
+    (37) exp -> . exp - exp
+    (38) exp -> . exp * exp
+    (39) exp -> . exp / exp
+    (40) exp -> . exp EQ exp
+    (41) exp -> . exp LE exp
+    (42) exp -> . exp GE exp
+    (43) exp -> . exp LT exp
+    (44) exp -> . exp GT exp
+    (45) exp -> . exp NE exp
+    (46) exp -> . exp MOD exp
+    (47) exp -> . exp AND exp
+    (48) exp -> . exp OR exp
+    (49) exp -> . INTEGER
+    (50) exp -> . DOUBLE
+    (51) exp -> . STRING
+    (52) exp -> . storable
+    (53) exp -> . ID ( opt_actual_args )
+    (54) exp -> . ( exp )
+    (55) exp -> . - exp
+    (56) exp -> . NOT exp
+    (57) storable -> . ID
+    (58) storable -> . ID [ exp ]
+
+    INTEGER         shift and go to state 26
+    DOUBLE          shift and go to state 27
+    STRING          shift and go to state 28
+    ID              shift and go to state 30
+    (               shift and go to state 31
+    -               shift and go to state 25
+    NOT             shift and go to state 32
+
+    exp                            shift and go to state 67
+    storable                       shift and go to state 29
+
+state 26
+
+    (49) exp -> INTEGER .
+
+    +               reduce using rule 49 (exp -> INTEGER .)
+    -               reduce using rule 49 (exp -> INTEGER .)
+    *               reduce using rule 49 (exp -> INTEGER .)
+    /               reduce using rule 49 (exp -> INTEGER .)
+    EQ              reduce using rule 49 (exp -> INTEGER .)
+    LE              reduce using rule 49 (exp -> INTEGER .)
+    GE              reduce using rule 49 (exp -> INTEGER .)
+    LT              reduce using rule 49 (exp -> INTEGER .)
+    GT              reduce using rule 49 (exp -> INTEGER .)
+    NE              reduce using rule 49 (exp -> INTEGER .)
+    MOD             reduce using rule 49 (exp -> INTEGER .)
+    AND             reduce using rule 49 (exp -> INTEGER .)
+    OR              reduce using rule 49 (exp -> INTEGER .)
+    ;               reduce using rule 49 (exp -> INTEGER .)
+    VOID_TYPE       reduce using rule 49 (exp -> INTEGER .)
+    PRINT           reduce using rule 49 (exp -> INTEGER .)
+    ID              reduce using rule 49 (exp -> INTEGER .)
+    RETURN          reduce using rule 49 (exp -> INTEGER .)
+    WHILE           reduce using rule 49 (exp -> INTEGER .)
+    IF              reduce using rule 49 (exp -> INTEGER .)
+    {               reduce using rule 49 (exp -> INTEGER .)
+    INTEGER_TYPE    reduce using rule 49 (exp -> INTEGER .)
+    DOUBLE_TYPE     reduce using rule 49 (exp -> INTEGER .)
+    STRING_TYPE     reduce using rule 49 (exp -> INTEGER .)
+    $end            reduce using rule 49 (exp -> INTEGER .)
+    }               reduce using rule 49 (exp -> INTEGER .)
+    ELSE            reduce using rule 49 (exp -> INTEGER .)
+    ,               reduce using rule 49 (exp -> INTEGER .)
+    )               reduce using rule 49 (exp -> INTEGER .)
+    ]               reduce using rule 49 (exp -> INTEGER .)
+
+
+state 27
+
+    (50) exp -> DOUBLE .
+
+    +               reduce using rule 50 (exp -> DOUBLE .)
+    -               reduce using rule 50 (exp -> DOUBLE .)
+    *               reduce using rule 50 (exp -> DOUBLE .)
+    /               reduce using rule 50 (exp -> DOUBLE .)
+    EQ              reduce using rule 50 (exp -> DOUBLE .)
+    LE              reduce using rule 50 (exp -> DOUBLE .)
+    GE              reduce using rule 50 (exp -> DOUBLE .)
+    LT              reduce using rule 50 (exp -> DOUBLE .)
+    GT              reduce using rule 50 (exp -> DOUBLE .)
+    NE              reduce using rule 50 (exp -> DOUBLE .)
+    MOD             reduce using rule 50 (exp -> DOUBLE .)
+    AND             reduce using rule 50 (exp -> DOUBLE .)
+    OR              reduce using rule 50 (exp -> DOUBLE .)
+    ;               reduce using rule 50 (exp -> DOUBLE .)
+    VOID_TYPE       reduce using rule 50 (exp -> DOUBLE .)
+    PRINT           reduce using rule 50 (exp -> DOUBLE .)
+    ID              reduce using rule 50 (exp -> DOUBLE .)
+    RETURN          reduce using rule 50 (exp -> DOUBLE .)
+    WHILE           reduce using rule 50 (exp -> DOUBLE .)
+    IF              reduce using rule 50 (exp -> DOUBLE .)
+    {               reduce using rule 50 (exp -> DOUBLE .)
+    INTEGER_TYPE    reduce using rule 50 (exp -> DOUBLE .)
+    DOUBLE_TYPE     reduce using rule 50 (exp -> DOUBLE .)
+    STRING_TYPE     reduce using rule 50 (exp -> DOUBLE .)
+    $end            reduce using rule 50 (exp -> DOUBLE .)
+    }               reduce using rule 50 (exp -> DOUBLE .)
+    ELSE            reduce using rule 50 (exp -> DOUBLE .)
+    ,               reduce using rule 50 (exp -> DOUBLE .)
+    )               reduce using rule 50 (exp -> DOUBLE .)
+    ]               reduce using rule 50 (exp -> DOUBLE .)
+
+
+state 28
+
+    (51) exp -> STRING .
+
+    +               reduce using rule 51 (exp -> STRING .)
+    -               reduce using rule 51 (exp -> STRING .)
+    *               reduce using rule 51 (exp -> STRING .)
+    /               reduce using rule 51 (exp -> STRING .)
+    EQ              reduce using rule 51 (exp -> STRING .)
+    LE              reduce using rule 51 (exp -> STRING .)
+    GE              reduce using rule 51 (exp -> STRING .)
+    LT              reduce using rule 51 (exp -> STRING .)
+    GT              reduce using rule 51 (exp -> STRING .)
+    NE              reduce using rule 51 (exp -> STRING .)
+    MOD             reduce using rule 51 (exp -> STRING .)
+    AND             reduce using rule 51 (exp -> STRING .)
+    OR              reduce using rule 51 (exp -> STRING .)
+    ;               reduce using rule 51 (exp -> STRING .)
+    VOID_TYPE       reduce using rule 51 (exp -> STRING .)
+    PRINT           reduce using rule 51 (exp -> STRING .)
+    ID              reduce using rule 51 (exp -> STRING .)
+    RETURN          reduce using rule 51 (exp -> STRING .)
+    WHILE           reduce using rule 51 (exp -> STRING .)
+    IF              reduce using rule 51 (exp -> STRING .)
+    {               reduce using rule 51 (exp -> STRING .)
+    INTEGER_TYPE    reduce using rule 51 (exp -> STRING .)
+    DOUBLE_TYPE     reduce using rule 51 (exp -> STRING .)
+    STRING_TYPE     reduce using rule 51 (exp -> STRING .)
+    $end            reduce using rule 51 (exp -> STRING .)
+    }               reduce using rule 51 (exp -> STRING .)
+    ELSE            reduce using rule 51 (exp -> STRING .)
+    ,               reduce using rule 51 (exp -> STRING .)
+    )               reduce using rule 51 (exp -> STRING .)
+    ]               reduce using rule 51 (exp -> STRING .)
+
+
+state 29
+
+    (52) exp -> storable .
+
+    +               reduce using rule 52 (exp -> storable .)
+    -               reduce using rule 52 (exp -> storable .)
+    *               reduce using rule 52 (exp -> storable .)
+    /               reduce using rule 52 (exp -> storable .)
+    EQ              reduce using rule 52 (exp -> storable .)
+    LE              reduce using rule 52 (exp -> storable .)
+    GE              reduce using rule 52 (exp -> storable .)
+    LT              reduce using rule 52 (exp -> storable .)
+    GT              reduce using rule 52 (exp -> storable .)
+    NE              reduce using rule 52 (exp -> storable .)
+    MOD             reduce using rule 52 (exp -> storable .)
+    AND             reduce using rule 52 (exp -> storable .)
+    OR              reduce using rule 52 (exp -> storable .)
+    ;               reduce using rule 52 (exp -> storable .)
+    VOID_TYPE       reduce using rule 52 (exp -> storable .)
+    PRINT           reduce using rule 52 (exp -> storable .)
+    ID              reduce using rule 52 (exp -> storable .)
+    RETURN          reduce using rule 52 (exp -> storable .)
+    WHILE           reduce using rule 52 (exp -> storable .)
+    IF              reduce using rule 52 (exp -> storable .)
+    {               reduce using rule 52 (exp -> storable .)
+    INTEGER_TYPE    reduce using rule 52 (exp -> storable .)
+    DOUBLE_TYPE     reduce using rule 52 (exp -> storable .)
+    STRING_TYPE     reduce using rule 52 (exp -> storable .)
+    $end            reduce using rule 52 (exp -> storable .)
+    }               reduce using rule 52 (exp -> storable .)
+    ELSE            reduce using rule 52 (exp -> storable .)
+    ,               reduce using rule 52 (exp -> storable .)
+    )               reduce using rule 52 (exp -> storable .)
+    ]               reduce using rule 52 (exp -> storable .)
+
+
+state 30
+
+    (53) exp -> ID . ( opt_actual_args )
+    (57) storable -> ID .
+    (58) storable -> ID . [ exp ]
+
+    (               shift and go to state 68
+    +               reduce using rule 57 (storable -> ID .)
+    -               reduce using rule 57 (storable -> ID .)
+    *               reduce using rule 57 (storable -> ID .)
+    /               reduce using rule 57 (storable -> ID .)
+    EQ              reduce using rule 57 (storable -> ID .)
+    LE              reduce using rule 57 (storable -> ID .)
+    GE              reduce using rule 57 (storable -> ID .)
+    LT              reduce using rule 57 (storable -> ID .)
+    GT              reduce using rule 57 (storable -> ID .)
+    NE              reduce using rule 57 (storable -> ID .)
+    MOD             reduce using rule 57 (storable -> ID .)
+    AND             reduce using rule 57 (storable -> ID .)
+    OR              reduce using rule 57 (storable -> ID .)
+    ;               reduce using rule 57 (storable -> ID .)
+    VOID_TYPE       reduce using rule 57 (storable -> ID .)
+    PRINT           reduce using rule 57 (storable -> ID .)
+    ID              reduce using rule 57 (storable -> ID .)
+    RETURN          reduce using rule 57 (storable -> ID .)
+    WHILE           reduce using rule 57 (storable -> ID .)
+    IF              reduce using rule 57 (storable -> ID .)
+    {               reduce using rule 57 (storable -> ID .)
+    INTEGER_TYPE    reduce using rule 57 (storable -> ID .)
+    DOUBLE_TYPE     reduce using rule 57 (storable -> ID .)
+    STRING_TYPE     reduce using rule 57 (storable -> ID .)
+    $end            reduce using rule 57 (storable -> ID .)
+    }               reduce using rule 57 (storable -> ID .)
+    ELSE            reduce using rule 57 (storable -> ID .)
+    ,               reduce using rule 57 (storable -> ID .)
+    )               reduce using rule 57 (storable -> ID .)
+    ]               reduce using rule 57 (storable -> ID .)
+    [               shift and go to state 21
+
+
+state 31
+
+    (54) exp -> ( . exp )
+    (36) exp -> . exp + exp
+    (37) exp -> . exp - exp
+    (38) exp -> . exp * exp
+    (39) exp -> . exp / exp
+    (40) exp -> . exp EQ exp
+    (41) exp -> . exp LE exp
+    (42) exp -> . exp GE exp
+    (43) exp -> . exp LT exp
+    (44) exp -> . exp GT exp
+    (45) exp -> . exp NE exp
+    (46) exp -> . exp MOD exp
+    (47) exp -> . exp AND exp
+    (48) exp -> . exp OR exp
+    (49) exp -> . INTEGER
+    (50) exp -> . DOUBLE
+    (51) exp -> . STRING
+    (52) exp -> . storable
+    (53) exp -> . ID ( opt_actual_args )
+    (54) exp -> . ( exp )
+    (55) exp -> . - exp
+    (56) exp -> . NOT exp
+    (57) storable -> . ID
+    (58) storable -> . ID [ exp ]
+
+    INTEGER         shift and go to state 26
+    DOUBLE          shift and go to state 27
+    STRING          shift and go to state 28
+    ID              shift and go to state 30
+    (               shift and go to state 31
+    -               shift and go to state 25
+    NOT             shift and go to state 32
+
+    exp                            shift and go to state 69
+    storable                       shift and go to state 29
+
+state 32
+
+    (56) exp -> NOT . exp
+    (36) exp -> . exp + exp
+    (37) exp -> . exp - exp
+    (38) exp -> . exp * exp
+    (39) exp -> . exp / exp
+    (40) exp -> . exp EQ exp
+    (41) exp -> . exp LE exp
+    (42) exp -> . exp GE exp
+    (43) exp -> . exp LT exp
+    (44) exp -> . exp GT exp
+    (45) exp -> . exp NE exp
+    (46) exp -> . exp MOD exp
+    (47) exp -> . exp AND exp
+    (48) exp -> . exp OR exp
+    (49) exp -> . INTEGER
+    (50) exp -> . DOUBLE
+    (51) exp -> . STRING
+    (52) exp -> . storable
+    (53) exp -> . ID ( opt_actual_args )
+    (54) exp -> . ( exp )
+    (55) exp -> . - exp
+    (56) exp -> . NOT exp
+    (57) storable -> . ID
+    (58) storable -> . ID [ exp ]
+
+    INTEGER         shift and go to state 26
+    DOUBLE          shift and go to state 27
+    STRING          shift and go to state 28
+    ID              shift and go to state 30
+    (               shift and go to state 31
+    -               shift and go to state 25
+    NOT             shift and go to state 32
+
+    exp                            shift and go to state 70
+    storable                       shift and go to state 29
+
+state 33
+
+    (10) stmt -> RETURN opt_exp . opt_semi
+    (59) opt_semi -> . ;
+    (60) opt_semi -> . empty
+    (61) empty -> .
+
+    ;               shift and go to state 65
+    VOID_TYPE       reduce using rule 61 (empty -> .)
+    PRINT           reduce using rule 61 (empty -> .)
+    ID              reduce using rule 61 (empty -> .)
+    RETURN          reduce using rule 61 (empty -> .)
+    WHILE           reduce using rule 61 (empty -> .)
+    IF              reduce using rule 61 (empty -> .)
+    {               reduce using rule 61 (empty -> .)
+    INTEGER_TYPE    reduce using rule 61 (empty -> .)
+    DOUBLE_TYPE     reduce using rule 61 (empty -> .)
+    STRING_TYPE     reduce using rule 61 (empty -> .)
+    $end            reduce using rule 61 (empty -> .)
+    }               reduce using rule 61 (empty -> .)
+    ELSE            reduce using rule 61 (empty -> .)
+
+    opt_semi                       shift and go to state 71
+    empty                          shift and go to state 66
+
+state 34
+
+    (32) opt_exp -> exp .
+    (36) exp -> exp . + exp
+    (37) exp -> exp . - exp
+    (38) exp -> exp . * exp
+    (39) exp -> exp . / exp
+    (40) exp -> exp . EQ exp
+    (41) exp -> exp . LE exp
+    (42) exp -> exp . GE exp
+    (43) exp -> exp . LT exp
+    (44) exp -> exp . GT exp
+    (45) exp -> exp . NE exp
+    (46) exp -> exp . MOD exp
+    (47) exp -> exp . AND exp
+    (48) exp -> exp . OR exp
+
+    ;               reduce using rule 32 (opt_exp -> exp .)
+    VOID_TYPE       reduce using rule 32 (opt_exp -> exp .)
+    PRINT           reduce using rule 32 (opt_exp -> exp .)
+    ID              reduce using rule 32 (opt_exp -> exp .)
+    RETURN          reduce using rule 32 (opt_exp -> exp .)
+    WHILE           reduce using rule 32 (opt_exp -> exp .)
+    IF              reduce using rule 32 (opt_exp -> exp .)
+    {               reduce using rule 32 (opt_exp -> exp .)
+    INTEGER_TYPE    reduce using rule 32 (opt_exp -> exp .)
+    DOUBLE_TYPE     reduce using rule 32 (opt_exp -> exp .)
+    STRING_TYPE     reduce using rule 32 (opt_exp -> exp .)
+    $end            reduce using rule 32 (opt_exp -> exp .)
+    }               reduce using rule 32 (opt_exp -> exp .)
+    ELSE            reduce using rule 32 (opt_exp -> exp .)
+    +               shift and go to state 52
+    -               shift and go to state 53
+    *               shift and go to state 54
+    /               shift and go to state 55
+    EQ              shift and go to state 56
+    LE              shift and go to state 57
+    GE              shift and go to state 58
+    LT              shift and go to state 59
+    GT              shift and go to state 60
+    NE              shift and go to state 61
+    MOD             shift and go to state 62
+    AND             shift and go to state 63
+    OR              shift and go to state 64
+
+
+state 35
+
+    (33) opt_exp -> empty .
+
+    ;               reduce using rule 33 (opt_exp -> empty .)
+    VOID_TYPE       reduce using rule 33 (opt_exp -> empty .)
+    PRINT           reduce using rule 33 (opt_exp -> empty .)
+    ID              reduce using rule 33 (opt_exp -> empty .)
+    RETURN          reduce using rule 33 (opt_exp -> empty .)
+    WHILE           reduce using rule 33 (opt_exp -> empty .)
+    IF              reduce using rule 33 (opt_exp -> empty .)
+    {               reduce using rule 33 (opt_exp -> empty .)
+    INTEGER_TYPE    reduce using rule 33 (opt_exp -> empty .)
+    DOUBLE_TYPE     reduce using rule 33 (opt_exp -> empty .)
+    STRING_TYPE     reduce using rule 33 (opt_exp -> empty .)
+    $end            reduce using rule 33 (opt_exp -> empty .)
+    }               reduce using rule 33 (opt_exp -> empty .)
+    ELSE            reduce using rule 33 (opt_exp -> empty .)
+
+
+state 36
+
+    (11) stmt -> WHILE ( . exp ) stmt
+    (36) exp -> . exp + exp
+    (37) exp -> . exp - exp
+    (38) exp -> . exp * exp
+    (39) exp -> . exp / exp
+    (40) exp -> . exp EQ exp
+    (41) exp -> . exp LE exp
+    (42) exp -> . exp GE exp
+    (43) exp -> . exp LT exp
+    (44) exp -> . exp GT exp
+    (45) exp -> . exp NE exp
+    (46) exp -> . exp MOD exp
+    (47) exp -> . exp AND exp
+    (48) exp -> . exp OR exp
+    (49) exp -> . INTEGER
+    (50) exp -> . DOUBLE
+    (51) exp -> . STRING
+    (52) exp -> . storable
+    (53) exp -> . ID ( opt_actual_args )
+    (54) exp -> . ( exp )
+    (55) exp -> . - exp
+    (56) exp -> . NOT exp
+    (57) storable -> . ID
+    (58) storable -> . ID [ exp ]
+
+    INTEGER         shift and go to state 26
+    DOUBLE          shift and go to state 27
+    STRING          shift and go to state 28
+    ID              shift and go to state 30
+    (               shift and go to state 31
+    -               shift and go to state 25
+    NOT             shift and go to state 32
+
+    exp                            shift and go to state 72
+    storable                       shift and go to state 29
+
+state 37
+
+    (12) stmt -> IF ( . exp ) stmt opt_else
+    (36) exp -> . exp + exp
+    (37) exp -> . exp - exp
+    (38) exp -> . exp * exp
+    (39) exp -> . exp / exp
+    (40) exp -> . exp EQ exp
+    (41) exp -> . exp LE exp
+    (42) exp -> . exp GE exp
+    (43) exp -> . exp LT exp
+    (44) exp -> . exp GT exp
+    (45) exp -> . exp NE exp
+    (46) exp -> . exp MOD exp
+    (47) exp -> . exp AND exp
+    (48) exp -> . exp OR exp
+    (49) exp -> . INTEGER
+    (50) exp -> . DOUBLE
+    (51) exp -> . STRING
+    (52) exp -> . storable
+    (53) exp -> . ID ( opt_actual_args )
+    (54) exp -> . ( exp )
+    (55) exp -> . - exp
+    (56) exp -> . NOT exp
+    (57) storable -> . ID
+    (58) storable -> . ID [ exp ]
+
+    INTEGER         shift and go to state 26
+    DOUBLE          shift and go to state 27
+    STRING          shift and go to state 28
+    ID              shift and go to state 30
+    (               shift and go to state 31
+    -               shift and go to state 25
+    NOT             shift and go to state 32
+
+    exp                            shift and go to state 73
+    storable                       shift and go to state 29
+
+state 38
+
+    (13) stmt -> { stmt_list . }
+
+    }               shift and go to state 74
+
+
+state 39
+
+    (15) data_type -> primitive_type [ . INTEGER ]
+
+    INTEGER         shift and go to state 75
+
+
+state 40
+
+    (4) stmt -> VOID_TYPE ID ( . opt_formal_args ) stmt
+    (19) opt_formal_args -> . formal_args
+    (20) opt_formal_args -> . empty
+    (21) formal_args -> . data_type ID , formal_args
+    (22) formal_args -> . data_type ID
+    (61) empty -> .
+    (14) data_type -> . primitive_type
+    (15) data_type -> . primitive_type [ INTEGER ]
+    (16) primitive_type -> . INTEGER_TYPE
+    (17) primitive_type -> . DOUBLE_TYPE
+    (18) primitive_type -> . STRING_TYPE
+
+    )               reduce using rule 61 (empty -> .)
+    INTEGER_TYPE    shift and go to state 15
+    DOUBLE_TYPE     shift and go to state 16
+    STRING_TYPE     shift and go to state 17
+
+    opt_formal_args                shift and go to state 76
+    formal_args                    shift and go to state 77
+    empty                          shift and go to state 78
+    data_type                      shift and go to state 79
+    primitive_type                 shift and go to state 14
+
+state 41
+
+    (9) stmt -> ID ( opt_actual_args . ) opt_semi
+
+    )               shift and go to state 80
+
+
+state 42
+
+    (28) opt_actual_args -> actual_args .
+
+    )               reduce using rule 28 (opt_actual_args -> actual_args .)
+
+
+state 43
+
+    (29) opt_actual_args -> empty .
+
+    )               reduce using rule 29 (opt_actual_args -> empty .)
+
+
+state 44
+
+    (30) actual_args -> exp . , actual_args
+    (31) actual_args -> exp .
+    (36) exp -> exp . + exp
+    (37) exp -> exp . - exp
+    (38) exp -> exp . * exp
+    (39) exp -> exp . / exp
+    (40) exp -> exp . EQ exp
+    (41) exp -> exp . LE exp
+    (42) exp -> exp . GE exp
+    (43) exp -> exp . LT exp
+    (44) exp -> exp . GT exp
+    (45) exp -> exp . NE exp
+    (46) exp -> exp . MOD exp
+    (47) exp -> exp . AND exp
+    (48) exp -> exp . OR exp
+
+    ,               shift and go to state 81
+    )               reduce using rule 31 (actual_args -> exp .)
+    +               shift and go to state 52
+    -               shift and go to state 53
+    *               shift and go to state 54
+    /               shift and go to state 55
+    EQ              shift and go to state 56
+    LE              shift and go to state 57
+    GE              shift and go to state 58
+    LT              shift and go to state 59
+    GT              shift and go to state 60
+    NE              shift and go to state 61
+    MOD             shift and go to state 62
+    AND             shift and go to state 63
+    OR              shift and go to state 64
+
+
+state 45
+
+    (58) storable -> ID [ exp . ]
+    (36) exp -> exp . + exp
+    (37) exp -> exp . - exp
+    (38) exp -> exp . * exp
+    (39) exp -> exp . / exp
+    (40) exp -> exp . EQ exp
+    (41) exp -> exp . LE exp
+    (42) exp -> exp . GE exp
+    (43) exp -> exp . LT exp
+    (44) exp -> exp . GT exp
+    (45) exp -> exp . NE exp
+    (46) exp -> exp . MOD exp
+    (47) exp -> exp . AND exp
+    (48) exp -> exp . OR exp
+
+    ]               shift and go to state 82
+    +               shift and go to state 52
+    -               shift and go to state 53
+    *               shift and go to state 54
+    /               shift and go to state 55
+    EQ              shift and go to state 56
+    LE              shift and go to state 57
+    GE              shift and go to state 58
+    LT              shift and go to state 59
+    GT              shift and go to state 60
+    NE              shift and go to state 61
+    MOD             shift and go to state 62
+    AND             shift and go to state 63
+    OR              shift and go to state 64
+
+
+state 46
+
+    (5) stmt -> data_type ID ( . opt_formal_args ) stmt
+    (19) opt_formal_args -> . formal_args
+    (20) opt_formal_args -> . empty
+    (21) formal_args -> . data_type ID , formal_args
+    (22) formal_args -> . data_type ID
+    (61) empty -> .
+    (14) data_type -> . primitive_type
+    (15) data_type -> . primitive_type [ INTEGER ]
+    (16) primitive_type -> . INTEGER_TYPE
+    (17) primitive_type -> . DOUBLE_TYPE
+    (18) primitive_type -> . STRING_TYPE
+
+    )               reduce using rule 61 (empty -> .)
+    INTEGER_TYPE    shift and go to state 15
+    DOUBLE_TYPE     shift and go to state 16
+    STRING_TYPE     shift and go to state 17
+
+    data_type                      shift and go to state 79
+    opt_formal_args                shift and go to state 83
+    formal_args                    shift and go to state 77
+    empty                          shift and go to state 78
+    primitive_type                 shift and go to state 14
+
+state 47
+
+    (6) stmt -> data_type ID opt_init . opt_semi
+    (59) opt_semi -> . ;
+    (60) opt_semi -> . empty
+    (61) empty -> .
+
+    ;               shift and go to state 65
+    VOID_TYPE       reduce using rule 61 (empty -> .)
+    PRINT           reduce using rule 61 (empty -> .)
+    ID              reduce using rule 61 (empty -> .)
+    RETURN          reduce using rule 61 (empty -> .)
+    WHILE           reduce using rule 61 (empty -> .)
+    IF              reduce using rule 61 (empty -> .)
+    {               reduce using rule 61 (empty -> .)
+    INTEGER_TYPE    reduce using rule 61 (empty -> .)
+    DOUBLE_TYPE     reduce using rule 61 (empty -> .)
+    STRING_TYPE     reduce using rule 61 (empty -> .)
+    $end            reduce using rule 61 (empty -> .)
+    }               reduce using rule 61 (empty -> .)
+    ELSE            reduce using rule 61 (empty -> .)
+
+    opt_semi                       shift and go to state 84
+    empty                          shift and go to state 66
+
+state 48
+
+    (23) opt_init -> = . exp
+    (24) opt_init -> = . { exp_list }
+    (36) exp -> . exp + exp
+    (37) exp -> . exp - exp
+    (38) exp -> . exp * exp
+    (39) exp -> . exp / exp
+    (40) exp -> . exp EQ exp
+    (41) exp -> . exp LE exp
+    (42) exp -> . exp GE exp
+    (43) exp -> . exp LT exp
+    (44) exp -> . exp GT exp
+    (45) exp -> . exp NE exp
+    (46) exp -> . exp MOD exp
+    (47) exp -> . exp AND exp
+    (48) exp -> . exp OR exp
+    (49) exp -> . INTEGER
+    (50) exp -> . DOUBLE
+    (51) exp -> . STRING
+    (52) exp -> . storable
+    (53) exp -> . ID ( opt_actual_args )
+    (54) exp -> . ( exp )
+    (55) exp -> . - exp
+    (56) exp -> . NOT exp
+    (57) storable -> . ID
+    (58) storable -> . ID [ exp ]
+
+    {               shift and go to state 86
+    INTEGER         shift and go to state 26
+    DOUBLE          shift and go to state 27
+    STRING          shift and go to state 28
+    ID              shift and go to state 30
+    (               shift and go to state 31
+    -               shift and go to state 25
+    NOT             shift and go to state 32
+
+    exp                            shift and go to state 85
+    storable                       shift and go to state 29
+
+state 49
+
+    (25) opt_init -> empty .
+
+    ;               reduce using rule 25 (opt_init -> empty .)
+    VOID_TYPE       reduce using rule 25 (opt_init -> empty .)
+    PRINT           reduce using rule 25 (opt_init -> empty .)
+    ID              reduce using rule 25 (opt_init -> empty .)
+    RETURN          reduce using rule 25 (opt_init -> empty .)
+    WHILE           reduce using rule 25 (opt_init -> empty .)
+    IF              reduce using rule 25 (opt_init -> empty .)
+    {               reduce using rule 25 (opt_init -> empty .)
+    INTEGER_TYPE    reduce using rule 25 (opt_init -> empty .)
+    DOUBLE_TYPE     reduce using rule 25 (opt_init -> empty .)
+    STRING_TYPE     reduce using rule 25 (opt_init -> empty .)
+    $end            reduce using rule 25 (opt_init -> empty .)
+    }               reduce using rule 25 (opt_init -> empty .)
+    ELSE            reduce using rule 25 (opt_init -> empty .)
+
+
+state 50
+
+    (7) stmt -> storable = exp . opt_semi
+    (36) exp -> exp . + exp
+    (37) exp -> exp . - exp
+    (38) exp -> exp . * exp
+    (39) exp -> exp . / exp
+    (40) exp -> exp . EQ exp
+    (41) exp -> exp . LE exp
+    (42) exp -> exp . GE exp
+    (43) exp -> exp . LT exp
+    (44) exp -> exp . GT exp
+    (45) exp -> exp . NE exp
+    (46) exp -> exp . MOD exp
+    (47) exp -> exp . AND exp
+    (48) exp -> exp . OR exp
+    (59) opt_semi -> . ;
+    (60) opt_semi -> . empty
+    (61) empty -> .
+
+    +               shift and go to state 52
+    -               shift and go to state 53
+    *               shift and go to state 54
+    /               shift and go to state 55
+    EQ              shift and go to state 56
+    LE              shift and go to state 57
+    GE              shift and go to state 58
+    LT              shift and go to state 59
+    GT              shift and go to state 60
+    NE              shift and go to state 61
+    MOD             shift and go to state 62
+    AND             shift and go to state 63
+    OR              shift and go to state 64
+    ;               shift and go to state 65
+    VOID_TYPE       reduce using rule 61 (empty -> .)
+    PRINT           reduce using rule 61 (empty -> .)
+    ID              reduce using rule 61 (empty -> .)
+    RETURN          reduce using rule 61 (empty -> .)
+    WHILE           reduce using rule 61 (empty -> .)
+    IF              reduce using rule 61 (empty -> .)
+    {               reduce using rule 61 (empty -> .)
+    INTEGER_TYPE    reduce using rule 61 (empty -> .)
+    DOUBLE_TYPE     reduce using rule 61 (empty -> .)
+    STRING_TYPE     reduce using rule 61 (empty -> .)
+    $end            reduce using rule 61 (empty -> .)
+    }               reduce using rule 61 (empty -> .)
+    ELSE            reduce using rule 61 (empty -> .)
+
+    opt_semi                       shift and go to state 87
+    empty                          shift and go to state 66
+
+state 51
+
+    (8) stmt -> PRINT exp opt_semi .
+
+    VOID_TYPE       reduce using rule 8 (stmt -> PRINT exp opt_semi .)
+    PRINT           reduce using rule 8 (stmt -> PRINT exp opt_semi .)
+    ID              reduce using rule 8 (stmt -> PRINT exp opt_semi .)
+    RETURN          reduce using rule 8 (stmt -> PRINT exp opt_semi .)
+    WHILE           reduce using rule 8 (stmt -> PRINT exp opt_semi .)
+    IF              reduce using rule 8 (stmt -> PRINT exp opt_semi .)
+    {               reduce using rule 8 (stmt -> PRINT exp opt_semi .)
+    INTEGER_TYPE    reduce using rule 8 (stmt -> PRINT exp opt_semi .)
+    DOUBLE_TYPE     reduce using rule 8 (stmt -> PRINT exp opt_semi .)
+    STRING_TYPE     reduce using rule 8 (stmt -> PRINT exp opt_semi .)
+    $end            reduce using rule 8 (stmt -> PRINT exp opt_semi .)
+    }               reduce using rule 8 (stmt -> PRINT exp opt_semi .)
+    ELSE            reduce using rule 8 (stmt -> PRINT exp opt_semi .)
+
+
+state 52
+
+    (36) exp -> exp + . exp
+    (36) exp -> . exp + exp
+    (37) exp -> . exp - exp
+    (38) exp -> . exp * exp
+    (39) exp -> . exp / exp
+    (40) exp -> . exp EQ exp
+    (41) exp -> . exp LE exp
+    (42) exp -> . exp GE exp
+    (43) exp -> . exp LT exp
+    (44) exp -> . exp GT exp
+    (45) exp -> . exp NE exp
+    (46) exp -> . exp MOD exp
+    (47) exp -> . exp AND exp
+    (48) exp -> . exp OR exp
+    (49) exp -> . INTEGER
+    (50) exp -> . DOUBLE
+    (51) exp -> . STRING
+    (52) exp -> . storable
+    (53) exp -> . ID ( opt_actual_args )
+    (54) exp -> . ( exp )
+    (55) exp -> . - exp
+    (56) exp -> . NOT exp
+    (57) storable -> . ID
+    (58) storable -> . ID [ exp ]
+
+    INTEGER         shift and go to state 26
+    DOUBLE          shift and go to state 27
+    STRING          shift and go to state 28
+    ID              shift and go to state 30
+    (               shift and go to state 31
+    -               shift and go to state 25
+    NOT             shift and go to state 32
+
+    exp                            shift and go to state 88
+    storable                       shift and go to state 29
+
+state 53
+
+    (37) exp -> exp - . exp
+    (36) exp -> . exp + exp
+    (37) exp -> . exp - exp
+    (38) exp -> . exp * exp
+    (39) exp -> . exp / exp
+    (40) exp -> . exp EQ exp
+    (41) exp -> . exp LE exp
+    (42) exp -> . exp GE exp
+    (43) exp -> . exp LT exp
+    (44) exp -> . exp GT exp
+    (45) exp -> . exp NE exp
+    (46) exp -> . exp MOD exp
+    (47) exp -> . exp AND exp
+    (48) exp -> . exp OR exp
+    (49) exp -> . INTEGER
+    (50) exp -> . DOUBLE
+    (51) exp -> . STRING
+    (52) exp -> . storable
+    (53) exp -> . ID ( opt_actual_args )
+    (54) exp -> . ( exp )
+    (55) exp -> . - exp
+    (56) exp -> . NOT exp
+    (57) storable -> . ID
+    (58) storable -> . ID [ exp ]
+
+    INTEGER         shift and go to state 26
+    DOUBLE          shift and go to state 27
+    STRING          shift and go to state 28
+    ID              shift and go to state 30
+    (               shift and go to state 31
+    -               shift and go to state 25
+    NOT             shift and go to state 32
+
+    exp                            shift and go to state 89
+    storable                       shift and go to state 29
+
+state 54
+
+    (38) exp -> exp * . exp
+    (36) exp -> . exp + exp
+    (37) exp -> . exp - exp
+    (38) exp -> . exp * exp
+    (39) exp -> . exp / exp
+    (40) exp -> . exp EQ exp
+    (41) exp -> . exp LE exp
+    (42) exp -> . exp GE exp
+    (43) exp -> . exp LT exp
+    (44) exp -> . exp GT exp
+    (45) exp -> . exp NE exp
+    (46) exp -> . exp MOD exp
+    (47) exp -> . exp AND exp
+    (48) exp -> . exp OR exp
+    (49) exp -> . INTEGER
+    (50) exp -> . DOUBLE
+    (51) exp -> . STRING
+    (52) exp -> . storable
+    (53) exp -> . ID ( opt_actual_args )
+    (54) exp -> . ( exp )
+    (55) exp -> . - exp
+    (56) exp -> . NOT exp
+    (57) storable -> . ID
+    (58) storable -> . ID [ exp ]
+
+    INTEGER         shift and go to state 26
+    DOUBLE          shift and go to state 27
+    STRING          shift and go to state 28
+    ID              shift and go to state 30
+    (               shift and go to state 31
+    -               shift and go to state 25
+    NOT             shift and go to state 32
+
+    exp                            shift and go to state 90
+    storable                       shift and go to state 29
+
+state 55
+
+    (39) exp -> exp / . exp
+    (36) exp -> . exp + exp
+    (37) exp -> . exp - exp
+    (38) exp -> . exp * exp
+    (39) exp -> . exp / exp
+    (40) exp -> . exp EQ exp
+    (41) exp -> . exp LE exp
+    (42) exp -> . exp GE exp
+    (43) exp -> . exp LT exp
+    (44) exp -> . exp GT exp
+    (45) exp -> . exp NE exp
+    (46) exp -> . exp MOD exp
+    (47) exp -> . exp AND exp
+    (48) exp -> . exp OR exp
+    (49) exp -> . INTEGER
+    (50) exp -> . DOUBLE
+    (51) exp -> . STRING
+    (52) exp -> . storable
+    (53) exp -> . ID ( opt_actual_args )
+    (54) exp -> . ( exp )
+    (55) exp -> . - exp
+    (56) exp -> . NOT exp
+    (57) storable -> . ID
+    (58) storable -> . ID [ exp ]
+
+    INTEGER         shift and go to state 26
+    DOUBLE          shift and go to state 27
+    STRING          shift and go to state 28
+    ID              shift and go to state 30
+    (               shift and go to state 31
+    -               shift and go to state 25
+    NOT             shift and go to state 32
+
+    exp                            shift and go to state 91
+    storable                       shift and go to state 29
+
+state 56
+
+    (40) exp -> exp EQ . exp
+    (36) exp -> . exp + exp
+    (37) exp -> . exp - exp
+    (38) exp -> . exp * exp
+    (39) exp -> . exp / exp
+    (40) exp -> . exp EQ exp
+    (41) exp -> . exp LE exp
+    (42) exp -> . exp GE exp
+    (43) exp -> . exp LT exp
+    (44) exp -> . exp GT exp
+    (45) exp -> . exp NE exp
+    (46) exp -> . exp MOD exp
+    (47) exp -> . exp AND exp
+    (48) exp -> . exp OR exp
+    (49) exp -> . INTEGER
+    (50) exp -> . DOUBLE
+    (51) exp -> . STRING
+    (52) exp -> . storable
+    (53) exp -> . ID ( opt_actual_args )
+    (54) exp -> . ( exp )
+    (55) exp -> . - exp
+    (56) exp -> . NOT exp
+    (57) storable -> . ID
+    (58) storable -> . ID [ exp ]
+
+    INTEGER         shift and go to state 26
+    DOUBLE          shift and go to state 27
+    STRING          shift and go to state 28
+    ID              shift and go to state 30
+    (               shift and go to state 31
+    -               shift and go to state 25
+    NOT             shift and go to state 32
+
+    exp                            shift and go to state 92
+    storable                       shift and go to state 29
+
+state 57
+
+    (41) exp -> exp LE . exp
+    (36) exp -> . exp + exp
+    (37) exp -> . exp - exp
+    (38) exp -> . exp * exp
+    (39) exp -> . exp / exp
+    (40) exp -> . exp EQ exp
+    (41) exp -> . exp LE exp
+    (42) exp -> . exp GE exp
+    (43) exp -> . exp LT exp
+    (44) exp -> . exp GT exp
+    (45) exp -> . exp NE exp
+    (46) exp -> . exp MOD exp
+    (47) exp -> . exp AND exp
+    (48) exp -> . exp OR exp
+    (49) exp -> . INTEGER
+    (50) exp -> . DOUBLE
+    (51) exp -> . STRING
+    (52) exp -> . storable
+    (53) exp -> . ID ( opt_actual_args )
+    (54) exp -> . ( exp )
+    (55) exp -> . - exp
+    (56) exp -> . NOT exp
+    (57) storable -> . ID
+    (58) storable -> . ID [ exp ]
+
+    INTEGER         shift and go to state 26
+    DOUBLE          shift and go to state 27
+    STRING          shift and go to state 28
+    ID              shift and go to state 30
+    (               shift and go to state 31
+    -               shift and go to state 25
+    NOT             shift and go to state 32
+
+    exp                            shift and go to state 93
+    storable                       shift and go to state 29
+
+state 58
+
+    (42) exp -> exp GE . exp
+    (36) exp -> . exp + exp
+    (37) exp -> . exp - exp
+    (38) exp -> . exp * exp
+    (39) exp -> . exp / exp
+    (40) exp -> . exp EQ exp
+    (41) exp -> . exp LE exp
+    (42) exp -> . exp GE exp
+    (43) exp -> . exp LT exp
+    (44) exp -> . exp GT exp
+    (45) exp -> . exp NE exp
+    (46) exp -> . exp MOD exp
+    (47) exp -> . exp AND exp
+    (48) exp -> . exp OR exp
+    (49) exp -> . INTEGER
+    (50) exp -> . DOUBLE
+    (51) exp -> . STRING
+    (52) exp -> . storable
+    (53) exp -> . ID ( opt_actual_args )
+    (54) exp -> . ( exp )
+    (55) exp -> . - exp
+    (56) exp -> . NOT exp
+    (57) storable -> . ID
+    (58) storable -> . ID [ exp ]
+
+    INTEGER         shift and go to state 26
+    DOUBLE          shift and go to state 27
+    STRING          shift and go to state 28
+    ID              shift and go to state 30
+    (               shift and go to state 31
+    -               shift and go to state 25
+    NOT             shift and go to state 32
+
+    exp                            shift and go to state 94
+    storable                       shift and go to state 29
+
+state 59
+
+    (43) exp -> exp LT . exp
+    (36) exp -> . exp + exp
+    (37) exp -> . exp - exp
+    (38) exp -> . exp * exp
+    (39) exp -> . exp / exp
+    (40) exp -> . exp EQ exp
+    (41) exp -> . exp LE exp
+    (42) exp -> . exp GE exp
+    (43) exp -> . exp LT exp
+    (44) exp -> . exp GT exp
+    (45) exp -> . exp NE exp
+    (46) exp -> . exp MOD exp
+    (47) exp -> . exp AND exp
+    (48) exp -> . exp OR exp
+    (49) exp -> . INTEGER
+    (50) exp -> . DOUBLE
+    (51) exp -> . STRING
+    (52) exp -> . storable
+    (53) exp -> . ID ( opt_actual_args )
+    (54) exp -> . ( exp )
+    (55) exp -> . - exp
+    (56) exp -> . NOT exp
+    (57) storable -> . ID
+    (58) storable -> . ID [ exp ]
+
+    INTEGER         shift and go to state 26
+    DOUBLE          shift and go to state 27
+    STRING          shift and go to state 28
+    ID              shift and go to state 30
+    (               shift and go to state 31
+    -               shift and go to state 25
+    NOT             shift and go to state 32
+
+    exp                            shift and go to state 95
+    storable                       shift and go to state 29
+
+state 60
+
+    (44) exp -> exp GT . exp
+    (36) exp -> . exp + exp
+    (37) exp -> . exp - exp
+    (38) exp -> . exp * exp
+    (39) exp -> . exp / exp
+    (40) exp -> . exp EQ exp
+    (41) exp -> . exp LE exp
+    (42) exp -> . exp GE exp
+    (43) exp -> . exp LT exp
+    (44) exp -> . exp GT exp
+    (45) exp -> . exp NE exp
+    (46) exp -> . exp MOD exp
+    (47) exp -> . exp AND exp
+    (48) exp -> . exp OR exp
+    (49) exp -> . INTEGER
+    (50) exp -> . DOUBLE
+    (51) exp -> . STRING
+    (52) exp -> . storable
+    (53) exp -> . ID ( opt_actual_args )
+    (54) exp -> . ( exp )
+    (55) exp -> . - exp
+    (56) exp -> . NOT exp
+    (57) storable -> . ID
+    (58) storable -> . ID [ exp ]
+
+    INTEGER         shift and go to state 26
+    DOUBLE          shift and go to state 27
+    STRING          shift and go to state 28
+    ID              shift and go to state 30
+    (               shift and go to state 31
+    -               shift and go to state 25
+    NOT             shift and go to state 32
+
+    exp                            shift and go to state 96
+    storable                       shift and go to state 29
+
+state 61
+
+    (45) exp -> exp NE . exp
+    (36) exp -> . exp + exp
+    (37) exp -> . exp - exp
+    (38) exp -> . exp * exp
+    (39) exp -> . exp / exp
+    (40) exp -> . exp EQ exp
+    (41) exp -> . exp LE exp
+    (42) exp -> . exp GE exp
+    (43) exp -> . exp LT exp
+    (44) exp -> . exp GT exp
+    (45) exp -> . exp NE exp
+    (46) exp -> . exp MOD exp
+    (47) exp -> . exp AND exp
+    (48) exp -> . exp OR exp
+    (49) exp -> . INTEGER
+    (50) exp -> . DOUBLE
+    (51) exp -> . STRING
+    (52) exp -> . storable
+    (53) exp -> . ID ( opt_actual_args )
+    (54) exp -> . ( exp )
+    (55) exp -> . - exp
+    (56) exp -> . NOT exp
+    (57) storable -> . ID
+    (58) storable -> . ID [ exp ]
+
+    INTEGER         shift and go to state 26
+    DOUBLE          shift and go to state 27
+    STRING          shift and go to state 28
+    ID              shift and go to state 30
+    (               shift and go to state 31
+    -               shift and go to state 25
+    NOT             shift and go to state 32
+
+    exp                            shift and go to state 97
+    storable                       shift and go to state 29
+
+state 62
+
+    (46) exp -> exp MOD . exp
+    (36) exp -> . exp + exp
+    (37) exp -> . exp - exp
+    (38) exp -> . exp * exp
+    (39) exp -> . exp / exp
+    (40) exp -> . exp EQ exp
+    (41) exp -> . exp LE exp
+    (42) exp -> . exp GE exp
+    (43) exp -> . exp LT exp
+    (44) exp -> . exp GT exp
+    (45) exp -> . exp NE exp
+    (46) exp -> . exp MOD exp
+    (47) exp -> . exp AND exp
+    (48) exp -> . exp OR exp
+    (49) exp -> . INTEGER
+    (50) exp -> . DOUBLE
+    (51) exp -> . STRING
+    (52) exp -> . storable
+    (53) exp -> . ID ( opt_actual_args )
+    (54) exp -> . ( exp )
+    (55) exp -> . - exp
+    (56) exp -> . NOT exp
+    (57) storable -> . ID
+    (58) storable -> . ID [ exp ]
+
+    INTEGER         shift and go to state 26
+    DOUBLE          shift and go to state 27
+    STRING          shift and go to state 28
+    ID              shift and go to state 30
+    (               shift and go to state 31
+    -               shift and go to state 25
+    NOT             shift and go to state 32
+
+    exp                            shift and go to state 98
+    storable                       shift and go to state 29
+
+state 63
+
+    (47) exp -> exp AND . exp
+    (36) exp -> . exp + exp
+    (37) exp -> . exp - exp
+    (38) exp -> . exp * exp
+    (39) exp -> . exp / exp
+    (40) exp -> . exp EQ exp
+    (41) exp -> . exp LE exp
+    (42) exp -> . exp GE exp
+    (43) exp -> . exp LT exp
+    (44) exp -> . exp GT exp
+    (45) exp -> . exp NE exp
+    (46) exp -> . exp MOD exp
+    (47) exp -> . exp AND exp
+    (48) exp -> . exp OR exp
+    (49) exp -> . INTEGER
+    (50) exp -> . DOUBLE
+    (51) exp -> . STRING
+    (52) exp -> . storable
+    (53) exp -> . ID ( opt_actual_args )
+    (54) exp -> . ( exp )
+    (55) exp -> . - exp
+    (56) exp -> . NOT exp
+    (57) storable -> . ID
+    (58) storable -> . ID [ exp ]
+
+    INTEGER         shift and go to state 26
+    DOUBLE          shift and go to state 27
+    STRING          shift and go to state 28
+    ID              shift and go to state 30
+    (               shift and go to state 31
+    -               shift and go to state 25
+    NOT             shift and go to state 32
+
+    exp                            shift and go to state 99
+    storable                       shift and go to state 29
+
+state 64
+
+    (48) exp -> exp OR . exp
+    (36) exp -> . exp + exp
+    (37) exp -> . exp - exp
+    (38) exp -> . exp * exp
+    (39) exp -> . exp / exp
+    (40) exp -> . exp EQ exp
+    (41) exp -> . exp LE exp
+    (42) exp -> . exp GE exp
+    (43) exp -> . exp LT exp
+    (44) exp -> . exp GT exp
+    (45) exp -> . exp NE exp
+    (46) exp -> . exp MOD exp
+    (47) exp -> . exp AND exp
+    (48) exp -> . exp OR exp
+    (49) exp -> . INTEGER
+    (50) exp -> . DOUBLE
+    (51) exp -> . STRING
+    (52) exp -> . storable
+    (53) exp -> . ID ( opt_actual_args )
+    (54) exp -> . ( exp )
+    (55) exp -> . - exp
+    (56) exp -> . NOT exp
+    (57) storable -> . ID
+    (58) storable -> . ID [ exp ]
+
+    INTEGER         shift and go to state 26
+    DOUBLE          shift and go to state 27
+    STRING          shift and go to state 28
+    ID              shift and go to state 30
+    (               shift and go to state 31
+    -               shift and go to state 25
+    NOT             shift and go to state 32
+
+    exp                            shift and go to state 100
+    storable                       shift and go to state 29
+
+state 65
+
+    (59) opt_semi -> ; .
+
+    VOID_TYPE       reduce using rule 59 (opt_semi -> ; .)
+    PRINT           reduce using rule 59 (opt_semi -> ; .)
+    ID              reduce using rule 59 (opt_semi -> ; .)
+    RETURN          reduce using rule 59 (opt_semi -> ; .)
+    WHILE           reduce using rule 59 (opt_semi -> ; .)
+    IF              reduce using rule 59 (opt_semi -> ; .)
+    {               reduce using rule 59 (opt_semi -> ; .)
+    INTEGER_TYPE    reduce using rule 59 (opt_semi -> ; .)
+    DOUBLE_TYPE     reduce using rule 59 (opt_semi -> ; .)
+    STRING_TYPE     reduce using rule 59 (opt_semi -> ; .)
+    $end            reduce using rule 59 (opt_semi -> ; .)
+    }               reduce using rule 59 (opt_semi -> ; .)
+    ELSE            reduce using rule 59 (opt_semi -> ; .)
+
+
+state 66
+
+    (60) opt_semi -> empty .
+
+    VOID_TYPE       reduce using rule 60 (opt_semi -> empty .)
+    PRINT           reduce using rule 60 (opt_semi -> empty .)
+    ID              reduce using rule 60 (opt_semi -> empty .)
+    RETURN          reduce using rule 60 (opt_semi -> empty .)
+    WHILE           reduce using rule 60 (opt_semi -> empty .)
+    IF              reduce using rule 60 (opt_semi -> empty .)
+    {               reduce using rule 60 (opt_semi -> empty .)
+    INTEGER_TYPE    reduce using rule 60 (opt_semi -> empty .)
+    DOUBLE_TYPE     reduce using rule 60 (opt_semi -> empty .)
+    STRING_TYPE     reduce using rule 60 (opt_semi -> empty .)
+    $end            reduce using rule 60 (opt_semi -> empty .)
+    }               reduce using rule 60 (opt_semi -> empty .)
+    ELSE            reduce using rule 60 (opt_semi -> empty .)
+
+
+state 67
+
+    (55) exp -> - exp .
+    (36) exp -> exp . + exp
+    (37) exp -> exp . - exp
+    (38) exp -> exp . * exp
+    (39) exp -> exp . / exp
+    (40) exp -> exp . EQ exp
+    (41) exp -> exp . LE exp
+    (42) exp -> exp . GE exp
+    (43) exp -> exp . LT exp
+    (44) exp -> exp . GT exp
+    (45) exp -> exp . NE exp
+    (46) exp -> exp . MOD exp
+    (47) exp -> exp . AND exp
+    (48) exp -> exp . OR exp
+
+    +               reduce using rule 55 (exp -> - exp .)
+    -               reduce using rule 55 (exp -> - exp .)
+    *               reduce using rule 55 (exp -> - exp .)
+    /               reduce using rule 55 (exp -> - exp .)
+    EQ              reduce using rule 55 (exp -> - exp .)
+    LE              reduce using rule 55 (exp -> - exp .)
+    GE              reduce using rule 55 (exp -> - exp .)
+    LT              reduce using rule 55 (exp -> - exp .)
+    GT              reduce using rule 55 (exp -> - exp .)
+    NE              reduce using rule 55 (exp -> - exp .)
+    MOD             reduce using rule 55 (exp -> - exp .)
+    AND             reduce using rule 55 (exp -> - exp .)
+    OR              reduce using rule 55 (exp -> - exp .)
+    ;               reduce using rule 55 (exp -> - exp .)
+    VOID_TYPE       reduce using rule 55 (exp -> - exp .)
+    PRINT           reduce using rule 55 (exp -> - exp .)
+    ID              reduce using rule 55 (exp -> - exp .)
+    RETURN          reduce using rule 55 (exp -> - exp .)
+    WHILE           reduce using rule 55 (exp -> - exp .)
+    IF              reduce using rule 55 (exp -> - exp .)
+    {               reduce using rule 55 (exp -> - exp .)
+    INTEGER_TYPE    reduce using rule 55 (exp -> - exp .)
+    DOUBLE_TYPE     reduce using rule 55 (exp -> - exp .)
+    STRING_TYPE     reduce using rule 55 (exp -> - exp .)
+    $end            reduce using rule 55 (exp -> - exp .)
+    }               reduce using rule 55 (exp -> - exp .)
+    ELSE            reduce using rule 55 (exp -> - exp .)
+    ,               reduce using rule 55 (exp -> - exp .)
+    )               reduce using rule 55 (exp -> - exp .)
+    ]               reduce using rule 55 (exp -> - exp .)
+
+  ! +               [ shift and go to state 52 ]
+  ! -               [ shift and go to state 53 ]
+  ! *               [ shift and go to state 54 ]
+  ! /               [ shift and go to state 55 ]
+  ! EQ              [ shift and go to state 56 ]
+  ! LE              [ shift and go to state 57 ]
+  ! GE              [ shift and go to state 58 ]
+  ! LT              [ shift and go to state 59 ]
+  ! GT              [ shift and go to state 60 ]
+  ! NE              [ shift and go to state 61 ]
+  ! MOD             [ shift and go to state 62 ]
+  ! AND             [ shift and go to state 63 ]
+  ! OR              [ shift and go to state 64 ]
+
+
+state 68
+
+    (53) exp -> ID ( . opt_actual_args )
+    (28) opt_actual_args -> . actual_args
+    (29) opt_actual_args -> . empty
+    (30) actual_args -> . exp , actual_args
+    (31) actual_args -> . exp
+    (61) empty -> .
+    (36) exp -> . exp + exp
+    (37) exp -> . exp - exp
+    (38) exp -> . exp * exp
+    (39) exp -> . exp / exp
+    (40) exp -> . exp EQ exp
+    (41) exp -> . exp LE exp
+    (42) exp -> . exp GE exp
+    (43) exp -> . exp LT exp
+    (44) exp -> . exp GT exp
+    (45) exp -> . exp NE exp
+    (46) exp -> . exp MOD exp
+    (47) exp -> . exp AND exp
+    (48) exp -> . exp OR exp
+    (49) exp -> . INTEGER
+    (50) exp -> . DOUBLE
+    (51) exp -> . STRING
+    (52) exp -> . storable
+    (53) exp -> . ID ( opt_actual_args )
+    (54) exp -> . ( exp )
+    (55) exp -> . - exp
+    (56) exp -> . NOT exp
+    (57) storable -> . ID
+    (58) storable -> . ID [ exp ]
+
+    )               reduce using rule 61 (empty -> .)
+    INTEGER         shift and go to state 26
+    DOUBLE          shift and go to state 27
+    STRING          shift and go to state 28
+    ID              shift and go to state 30
+    (               shift and go to state 31
+    -               shift and go to state 25
+    NOT             shift and go to state 32
+
+    opt_actual_args                shift and go to state 101
+    actual_args                    shift and go to state 42
+    empty                          shift and go to state 43
+    exp                            shift and go to state 44
+    storable                       shift and go to state 29
+
+state 69
+
+    (54) exp -> ( exp . )
+    (36) exp -> exp . + exp
+    (37) exp -> exp . - exp
+    (38) exp -> exp . * exp
+    (39) exp -> exp . / exp
+    (40) exp -> exp . EQ exp
+    (41) exp -> exp . LE exp
+    (42) exp -> exp . GE exp
+    (43) exp -> exp . LT exp
+    (44) exp -> exp . GT exp
+    (45) exp -> exp . NE exp
+    (46) exp -> exp . MOD exp
+    (47) exp -> exp . AND exp
+    (48) exp -> exp . OR exp
+
+    )               shift and go to state 102
+    +               shift and go to state 52
+    -               shift and go to state 53
+    *               shift and go to state 54
+    /               shift and go to state 55
+    EQ              shift and go to state 56
+    LE              shift and go to state 57
+    GE              shift and go to state 58
+    LT              shift and go to state 59
+    GT              shift and go to state 60
+    NE              shift and go to state 61
+    MOD             shift and go to state 62
+    AND             shift and go to state 63
+    OR              shift and go to state 64
+
+
+state 70
+
+    (56) exp -> NOT exp .
+    (36) exp -> exp . + exp
+    (37) exp -> exp . - exp
+    (38) exp -> exp . * exp
+    (39) exp -> exp . / exp
+    (40) exp -> exp . EQ exp
+    (41) exp -> exp . LE exp
+    (42) exp -> exp . GE exp
+    (43) exp -> exp . LT exp
+    (44) exp -> exp . GT exp
+    (45) exp -> exp . NE exp
+    (46) exp -> exp . MOD exp
+    (47) exp -> exp . AND exp
+    (48) exp -> exp . OR exp
+
+    +               reduce using rule 56 (exp -> NOT exp .)
+    -               reduce using rule 56 (exp -> NOT exp .)
+    *               reduce using rule 56 (exp -> NOT exp .)
+    /               reduce using rule 56 (exp -> NOT exp .)
+    EQ              reduce using rule 56 (exp -> NOT exp .)
+    LE              reduce using rule 56 (exp -> NOT exp .)
+    GE              reduce using rule 56 (exp -> NOT exp .)
+    LT              reduce using rule 56 (exp -> NOT exp .)
+    GT              reduce using rule 56 (exp -> NOT exp .)
+    NE              reduce using rule 56 (exp -> NOT exp .)
+    MOD             reduce using rule 56 (exp -> NOT exp .)
+    AND             reduce using rule 56 (exp -> NOT exp .)
+    OR              reduce using rule 56 (exp -> NOT exp .)
+    ;               reduce using rule 56 (exp -> NOT exp .)
+    VOID_TYPE       reduce using rule 56 (exp -> NOT exp .)
+    PRINT           reduce using rule 56 (exp -> NOT exp .)
+    ID              reduce using rule 56 (exp -> NOT exp .)
+    RETURN          reduce using rule 56 (exp -> NOT exp .)
+    WHILE           reduce using rule 56 (exp -> NOT exp .)
+    IF              reduce using rule 56 (exp -> NOT exp .)
+    {               reduce using rule 56 (exp -> NOT exp .)
+    INTEGER_TYPE    reduce using rule 56 (exp -> NOT exp .)
+    DOUBLE_TYPE     reduce using rule 56 (exp -> NOT exp .)
+    STRING_TYPE     reduce using rule 56 (exp -> NOT exp .)
+    $end            reduce using rule 56 (exp -> NOT exp .)
+    }               reduce using rule 56 (exp -> NOT exp .)
+    ELSE            reduce using rule 56 (exp -> NOT exp .)
+    ,               reduce using rule 56 (exp -> NOT exp .)
+    )               reduce using rule 56 (exp -> NOT exp .)
+    ]               reduce using rule 56 (exp -> NOT exp .)
+
+  ! +               [ shift and go to state 52 ]
+  ! -               [ shift and go to state 53 ]
+  ! *               [ shift and go to state 54 ]
+  ! /               [ shift and go to state 55 ]
+  ! EQ              [ shift and go to state 56 ]
+  ! LE              [ shift and go to state 57 ]
+  ! GE              [ shift and go to state 58 ]
+  ! LT              [ shift and go to state 59 ]
+  ! GT              [ shift and go to state 60 ]
+  ! NE              [ shift and go to state 61 ]
+  ! MOD             [ shift and go to state 62 ]
+  ! AND             [ shift and go to state 63 ]
+  ! OR              [ shift and go to state 64 ]
+
+
+state 71
+
+    (10) stmt -> RETURN opt_exp opt_semi .
+
+    VOID_TYPE       reduce using rule 10 (stmt -> RETURN opt_exp opt_semi .)
+    PRINT           reduce using rule 10 (stmt -> RETURN opt_exp opt_semi .)
+    ID              reduce using rule 10 (stmt -> RETURN opt_exp opt_semi .)
+    RETURN          reduce using rule 10 (stmt -> RETURN opt_exp opt_semi .)
+    WHILE           reduce using rule 10 (stmt -> RETURN opt_exp opt_semi .)
+    IF              reduce using rule 10 (stmt -> RETURN opt_exp opt_semi .)
+    {               reduce using rule 10 (stmt -> RETURN opt_exp opt_semi .)
+    INTEGER_TYPE    reduce using rule 10 (stmt -> RETURN opt_exp opt_semi .)
+    DOUBLE_TYPE     reduce using rule 10 (stmt -> RETURN opt_exp opt_semi .)
+    STRING_TYPE     reduce using rule 10 (stmt -> RETURN opt_exp opt_semi .)
+    $end            reduce using rule 10 (stmt -> RETURN opt_exp opt_semi .)
+    }               reduce using rule 10 (stmt -> RETURN opt_exp opt_semi .)
+    ELSE            reduce using rule 10 (stmt -> RETURN opt_exp opt_semi .)
+
+
+state 72
+
+    (11) stmt -> WHILE ( exp . ) stmt
+    (36) exp -> exp . + exp
+    (37) exp -> exp . - exp
+    (38) exp -> exp . * exp
+    (39) exp -> exp . / exp
+    (40) exp -> exp . EQ exp
+    (41) exp -> exp . LE exp
+    (42) exp -> exp . GE exp
+    (43) exp -> exp . LT exp
+    (44) exp -> exp . GT exp
+    (45) exp -> exp . NE exp
+    (46) exp -> exp . MOD exp
+    (47) exp -> exp . AND exp
+    (48) exp -> exp . OR exp
+
+    )               shift and go to state 103
+    +               shift and go to state 52
+    -               shift and go to state 53
+    *               shift and go to state 54
+    /               shift and go to state 55
+    EQ              shift and go to state 56
+    LE              shift and go to state 57
+    GE              shift and go to state 58
+    LT              shift and go to state 59
+    GT              shift and go to state 60
+    NE              shift and go to state 61
+    MOD             shift and go to state 62
+    AND             shift and go to state 63
+    OR              shift and go to state 64
+
+
+state 73
+
+    (12) stmt -> IF ( exp . ) stmt opt_else
+    (36) exp -> exp . + exp
+    (37) exp -> exp . - exp
+    (38) exp -> exp . * exp
+    (39) exp -> exp . / exp
+    (40) exp -> exp . EQ exp
+    (41) exp -> exp . LE exp
+    (42) exp -> exp . GE exp
+    (43) exp -> exp . LT exp
+    (44) exp -> exp . GT exp
+    (45) exp -> exp . NE exp
+    (46) exp -> exp . MOD exp
+    (47) exp -> exp . AND exp
+    (48) exp -> exp . OR exp
+
+    )               shift and go to state 104
+    +               shift and go to state 52
+    -               shift and go to state 53
+    *               shift and go to state 54
+    /               shift and go to state 55
+    EQ              shift and go to state 56
+    LE              shift and go to state 57
+    GE              shift and go to state 58
+    LT              shift and go to state 59
+    GT              shift and go to state 60
+    NE              shift and go to state 61
+    MOD             shift and go to state 62
+    AND             shift and go to state 63
+    OR              shift and go to state 64
+
+
+state 74
+
+    (13) stmt -> { stmt_list } .
+
+    VOID_TYPE       reduce using rule 13 (stmt -> { stmt_list } .)
+    PRINT           reduce using rule 13 (stmt -> { stmt_list } .)
+    ID              reduce using rule 13 (stmt -> { stmt_list } .)
+    RETURN          reduce using rule 13 (stmt -> { stmt_list } .)
+    WHILE           reduce using rule 13 (stmt -> { stmt_list } .)
+    IF              reduce using rule 13 (stmt -> { stmt_list } .)
+    {               reduce using rule 13 (stmt -> { stmt_list } .)
+    INTEGER_TYPE    reduce using rule 13 (stmt -> { stmt_list } .)
+    DOUBLE_TYPE     reduce using rule 13 (stmt -> { stmt_list } .)
+    STRING_TYPE     reduce using rule 13 (stmt -> { stmt_list } .)
+    $end            reduce using rule 13 (stmt -> { stmt_list } .)
+    }               reduce using rule 13 (stmt -> { stmt_list } .)
+    ELSE            reduce using rule 13 (stmt -> { stmt_list } .)
+
+
+state 75
+
+    (15) data_type -> primitive_type [ INTEGER . ]
+
+    ]               shift and go to state 105
+
+
+state 76
+
+    (4) stmt -> VOID_TYPE ID ( opt_formal_args . ) stmt
+
+    )               shift and go to state 106
+
+
+state 77
+
+    (19) opt_formal_args -> formal_args .
+
+    )               reduce using rule 19 (opt_formal_args -> formal_args .)
+
+
+state 78
+
+    (20) opt_formal_args -> empty .
+
+    )               reduce using rule 20 (opt_formal_args -> empty .)
+
+
+state 79
+
+    (21) formal_args -> data_type . ID , formal_args
+    (22) formal_args -> data_type . ID
+
+    ID              shift and go to state 107
+
+
+state 80
+
+    (9) stmt -> ID ( opt_actual_args ) . opt_semi
+    (59) opt_semi -> . ;
+    (60) opt_semi -> . empty
+    (61) empty -> .
+
+    ;               shift and go to state 65
+    VOID_TYPE       reduce using rule 61 (empty -> .)
+    PRINT           reduce using rule 61 (empty -> .)
+    ID              reduce using rule 61 (empty -> .)
+    RETURN          reduce using rule 61 (empty -> .)
+    WHILE           reduce using rule 61 (empty -> .)
+    IF              reduce using rule 61 (empty -> .)
+    {               reduce using rule 61 (empty -> .)
+    INTEGER_TYPE    reduce using rule 61 (empty -> .)
+    DOUBLE_TYPE     reduce using rule 61 (empty -> .)
+    STRING_TYPE     reduce using rule 61 (empty -> .)
+    $end            reduce using rule 61 (empty -> .)
+    }               reduce using rule 61 (empty -> .)
+    ELSE            reduce using rule 61 (empty -> .)
+
+    opt_semi                       shift and go to state 108
+    empty                          shift and go to state 66
+
+state 81
+
+    (30) actual_args -> exp , . actual_args
+    (30) actual_args -> . exp , actual_args
+    (31) actual_args -> . exp
+    (36) exp -> . exp + exp
+    (37) exp -> . exp - exp
+    (38) exp -> . exp * exp
+    (39) exp -> . exp / exp
+    (40) exp -> . exp EQ exp
+    (41) exp -> . exp LE exp
+    (42) exp -> . exp GE exp
+    (43) exp -> . exp LT exp
+    (44) exp -> . exp GT exp
+    (45) exp -> . exp NE exp
+    (46) exp -> . exp MOD exp
+    (47) exp -> . exp AND exp
+    (48) exp -> . exp OR exp
+    (49) exp -> . INTEGER
+    (50) exp -> . DOUBLE
+    (51) exp -> . STRING
+    (52) exp -> . storable
+    (53) exp -> . ID ( opt_actual_args )
+    (54) exp -> . ( exp )
+    (55) exp -> . - exp
+    (56) exp -> . NOT exp
+    (57) storable -> . ID
+    (58) storable -> . ID [ exp ]
+
+    INTEGER         shift and go to state 26
+    DOUBLE          shift and go to state 27
+    STRING          shift and go to state 28
+    ID              shift and go to state 30
+    (               shift and go to state 31
+    -               shift and go to state 25
+    NOT             shift and go to state 32
+
+    exp                            shift and go to state 44
+    actual_args                    shift and go to state 109
+    storable                       shift and go to state 29
+
+state 82
+
+    (58) storable -> ID [ exp ] .
+
+    =               reduce using rule 58 (storable -> ID [ exp ] .)
+    +               reduce using rule 58 (storable -> ID [ exp ] .)
+    -               reduce using rule 58 (storable -> ID [ exp ] .)
+    *               reduce using rule 58 (storable -> ID [ exp ] .)
+    /               reduce using rule 58 (storable -> ID [ exp ] .)
+    EQ              reduce using rule 58 (storable -> ID [ exp ] .)
+    LE              reduce using rule 58 (storable -> ID [ exp ] .)
+    GE              reduce using rule 58 (storable -> ID [ exp ] .)
+    LT              reduce using rule 58 (storable -> ID [ exp ] .)
+    GT              reduce using rule 58 (storable -> ID [ exp ] .)
+    NE              reduce using rule 58 (storable -> ID [ exp ] .)
+    MOD             reduce using rule 58 (storable -> ID [ exp ] .)
+    AND             reduce using rule 58 (storable -> ID [ exp ] .)
+    OR              reduce using rule 58 (storable -> ID [ exp ] .)
+    ;               reduce using rule 58 (storable -> ID [ exp ] .)
+    VOID_TYPE       reduce using rule 58 (storable -> ID [ exp ] .)
+    PRINT           reduce using rule 58 (storable -> ID [ exp ] .)
+    ID              reduce using rule 58 (storable -> ID [ exp ] .)
+    RETURN          reduce using rule 58 (storable -> ID [ exp ] .)
+    WHILE           reduce using rule 58 (storable -> ID [ exp ] .)
+    IF              reduce using rule 58 (storable -> ID [ exp ] .)
+    {               reduce using rule 58 (storable -> ID [ exp ] .)
+    INTEGER_TYPE    reduce using rule 58 (storable -> ID [ exp ] .)
+    DOUBLE_TYPE     reduce using rule 58 (storable -> ID [ exp ] .)
+    STRING_TYPE     reduce using rule 58 (storable -> ID [ exp ] .)
+    $end            reduce using rule 58 (storable -> ID [ exp ] .)
+    }               reduce using rule 58 (storable -> ID [ exp ] .)
+    ELSE            reduce using rule 58 (storable -> ID [ exp ] .)
+    ,               reduce using rule 58 (storable -> ID [ exp ] .)
+    )               reduce using rule 58 (storable -> ID [ exp ] .)
+    ]               reduce using rule 58 (storable -> ID [ exp ] .)
+
+
+state 83
+
+    (5) stmt -> data_type ID ( opt_formal_args . ) stmt
+
+    )               shift and go to state 110
+
+
+state 84
+
+    (6) stmt -> data_type ID opt_init opt_semi .
+
+    VOID_TYPE       reduce using rule 6 (stmt -> data_type ID opt_init opt_semi .)
+    PRINT           reduce using rule 6 (stmt -> data_type ID opt_init opt_semi .)
+    ID              reduce using rule 6 (stmt -> data_type ID opt_init opt_semi .)
+    RETURN          reduce using rule 6 (stmt -> data_type ID opt_init opt_semi .)
+    WHILE           reduce using rule 6 (stmt -> data_type ID opt_init opt_semi .)
+    IF              reduce using rule 6 (stmt -> data_type ID opt_init opt_semi .)
+    {               reduce using rule 6 (stmt -> data_type ID opt_init opt_semi .)
+    INTEGER_TYPE    reduce using rule 6 (stmt -> data_type ID opt_init opt_semi .)
+    DOUBLE_TYPE     reduce using rule 6 (stmt -> data_type ID opt_init opt_semi .)
+    STRING_TYPE     reduce using rule 6 (stmt -> data_type ID opt_init opt_semi .)
+    $end            reduce using rule 6 (stmt -> data_type ID opt_init opt_semi .)
+    }               reduce using rule 6 (stmt -> data_type ID opt_init opt_semi .)
+    ELSE            reduce using rule 6 (stmt -> data_type ID opt_init opt_semi .)
+
+
+state 85
+
+    (23) opt_init -> = exp .
+    (36) exp -> exp . + exp
+    (37) exp -> exp . - exp
+    (38) exp -> exp . * exp
+    (39) exp -> exp . / exp
+    (40) exp -> exp . EQ exp
+    (41) exp -> exp . LE exp
+    (42) exp -> exp . GE exp
+    (43) exp -> exp . LT exp
+    (44) exp -> exp . GT exp
+    (45) exp -> exp . NE exp
+    (46) exp -> exp . MOD exp
+    (47) exp -> exp . AND exp
+    (48) exp -> exp . OR exp
+
+    ;               reduce using rule 23 (opt_init -> = exp .)
+    VOID_TYPE       reduce using rule 23 (opt_init -> = exp .)
+    PRINT           reduce using rule 23 (opt_init -> = exp .)
+    ID              reduce using rule 23 (opt_init -> = exp .)
+    RETURN          reduce using rule 23 (opt_init -> = exp .)
+    WHILE           reduce using rule 23 (opt_init -> = exp .)
+    IF              reduce using rule 23 (opt_init -> = exp .)
+    {               reduce using rule 23 (opt_init -> = exp .)
+    INTEGER_TYPE    reduce using rule 23 (opt_init -> = exp .)
+    DOUBLE_TYPE     reduce using rule 23 (opt_init -> = exp .)
+    STRING_TYPE     reduce using rule 23 (opt_init -> = exp .)
+    $end            reduce using rule 23 (opt_init -> = exp .)
+    }               reduce using rule 23 (opt_init -> = exp .)
+    ELSE            reduce using rule 23 (opt_init -> = exp .)
+    +               shift and go to state 52
+    -               shift and go to state 53
+    *               shift and go to state 54
+    /               shift and go to state 55
+    EQ              shift and go to state 56
+    LE              shift and go to state 57
+    GE              shift and go to state 58
+    LT              shift and go to state 59
+    GT              shift and go to state 60
+    NE              shift and go to state 61
+    MOD             shift and go to state 62
+    AND             shift and go to state 63
+    OR              shift and go to state 64
+
+
+state 86
+
+    (24) opt_init -> = { . exp_list }
+    (26) exp_list -> . exp , exp_list
+    (27) exp_list -> . exp
+    (36) exp -> . exp + exp
+    (37) exp -> . exp - exp
+    (38) exp -> . exp * exp
+    (39) exp -> . exp / exp
+    (40) exp -> . exp EQ exp
+    (41) exp -> . exp LE exp
+    (42) exp -> . exp GE exp
+    (43) exp -> . exp LT exp
+    (44) exp -> . exp GT exp
+    (45) exp -> . exp NE exp
+    (46) exp -> . exp MOD exp
+    (47) exp -> . exp AND exp
+    (48) exp -> . exp OR exp
+    (49) exp -> . INTEGER
+    (50) exp -> . DOUBLE
+    (51) exp -> . STRING
+    (52) exp -> . storable
+    (53) exp -> . ID ( opt_actual_args )
+    (54) exp -> . ( exp )
+    (55) exp -> . - exp
+    (56) exp -> . NOT exp
+    (57) storable -> . ID
+    (58) storable -> . ID [ exp ]
+
+    INTEGER         shift and go to state 26
+    DOUBLE          shift and go to state 27
+    STRING          shift and go to state 28
+    ID              shift and go to state 30
+    (               shift and go to state 31
+    -               shift and go to state 25
+    NOT             shift and go to state 32
+
+    exp_list                       shift and go to state 111
+    exp                            shift and go to state 112
+    storable                       shift and go to state 29
+
+state 87
+
+    (7) stmt -> storable = exp opt_semi .
+
+    VOID_TYPE       reduce using rule 7 (stmt -> storable = exp opt_semi .)
+    PRINT           reduce using rule 7 (stmt -> storable = exp opt_semi .)
+    ID              reduce using rule 7 (stmt -> storable = exp opt_semi .)
+    RETURN          reduce using rule 7 (stmt -> storable = exp opt_semi .)
+    WHILE           reduce using rule 7 (stmt -> storable = exp opt_semi .)
+    IF              reduce using rule 7 (stmt -> storable = exp opt_semi .)
+    {               reduce using rule 7 (stmt -> storable = exp opt_semi .)
+    INTEGER_TYPE    reduce using rule 7 (stmt -> storable = exp opt_semi .)
+    DOUBLE_TYPE     reduce using rule 7 (stmt -> storable = exp opt_semi .)
+    STRING_TYPE     reduce using rule 7 (stmt -> storable = exp opt_semi .)
+    $end            reduce using rule 7 (stmt -> storable = exp opt_semi .)
+    }               reduce using rule 7 (stmt -> storable = exp opt_semi .)
+    ELSE            reduce using rule 7 (stmt -> storable = exp opt_semi .)
+
+
+state 88
+
+    (36) exp -> exp + exp .
+    (36) exp -> exp . + exp
+    (37) exp -> exp . - exp
+    (38) exp -> exp . * exp
+    (39) exp -> exp . / exp
+    (40) exp -> exp . EQ exp
+    (41) exp -> exp . LE exp
+    (42) exp -> exp . GE exp
+    (43) exp -> exp . LT exp
+    (44) exp -> exp . GT exp
+    (45) exp -> exp . NE exp
+    (46) exp -> exp . MOD exp
+    (47) exp -> exp . AND exp
+    (48) exp -> exp . OR exp
+
+    +               reduce using rule 36 (exp -> exp + exp .)
+    -               reduce using rule 36 (exp -> exp + exp .)
+    EQ              reduce using rule 36 (exp -> exp + exp .)
+    LE              reduce using rule 36 (exp -> exp + exp .)
+    GE              reduce using rule 36 (exp -> exp + exp .)
+    LT              reduce using rule 36 (exp -> exp + exp .)
+    GT              reduce using rule 36 (exp -> exp + exp .)
+    NE              reduce using rule 36 (exp -> exp + exp .)
+    MOD             reduce using rule 36 (exp -> exp + exp .)
+    AND             reduce using rule 36 (exp -> exp + exp .)
+    OR              reduce using rule 36 (exp -> exp + exp .)
+    ;               reduce using rule 36 (exp -> exp + exp .)
+    VOID_TYPE       reduce using rule 36 (exp -> exp + exp .)
+    PRINT           reduce using rule 36 (exp -> exp + exp .)
+    ID              reduce using rule 36 (exp -> exp + exp .)
+    RETURN          reduce using rule 36 (exp -> exp + exp .)
+    WHILE           reduce using rule 36 (exp -> exp + exp .)
+    IF              reduce using rule 36 (exp -> exp + exp .)
+    {               reduce using rule 36 (exp -> exp + exp .)
+    INTEGER_TYPE    reduce using rule 36 (exp -> exp + exp .)
+    DOUBLE_TYPE     reduce using rule 36 (exp -> exp + exp .)
+    STRING_TYPE     reduce using rule 36 (exp -> exp + exp .)
+    $end            reduce using rule 36 (exp -> exp + exp .)
+    }               reduce using rule 36 (exp -> exp + exp .)
+    ELSE            reduce using rule 36 (exp -> exp + exp .)
+    ,               reduce using rule 36 (exp -> exp + exp .)
+    )               reduce using rule 36 (exp -> exp + exp .)
+    ]               reduce using rule 36 (exp -> exp + exp .)
+    *               shift and go to state 54
+    /               shift and go to state 55
+
+  ! *               [ reduce using rule 36 (exp -> exp + exp .) ]
+  ! /               [ reduce using rule 36 (exp -> exp + exp .) ]
+  ! +               [ shift and go to state 52 ]
+  ! -               [ shift and go to state 53 ]
+  ! EQ              [ shift and go to state 56 ]
+  ! LE              [ shift and go to state 57 ]
+  ! GE              [ shift and go to state 58 ]
+  ! LT              [ shift and go to state 59 ]
+  ! GT              [ shift and go to state 60 ]
+  ! NE              [ shift and go to state 61 ]
+  ! MOD             [ shift and go to state 62 ]
+  ! AND             [ shift and go to state 63 ]
+  ! OR              [ shift and go to state 64 ]
+
+
+state 89
+
+    (37) exp -> exp - exp .
+    (36) exp -> exp . + exp
+    (37) exp -> exp . - exp
+    (38) exp -> exp . * exp
+    (39) exp -> exp . / exp
+    (40) exp -> exp . EQ exp
+    (41) exp -> exp . LE exp
+    (42) exp -> exp . GE exp
+    (43) exp -> exp . LT exp
+    (44) exp -> exp . GT exp
+    (45) exp -> exp . NE exp
+    (46) exp -> exp . MOD exp
+    (47) exp -> exp . AND exp
+    (48) exp -> exp . OR exp
+
+    +               reduce using rule 37 (exp -> exp - exp .)
+    -               reduce using rule 37 (exp -> exp - exp .)
+    EQ              reduce using rule 37 (exp -> exp - exp .)
+    LE              reduce using rule 37 (exp -> exp - exp .)
+    GE              reduce using rule 37 (exp -> exp - exp .)
+    LT              reduce using rule 37 (exp -> exp - exp .)
+    GT              reduce using rule 37 (exp -> exp - exp .)
+    NE              reduce using rule 37 (exp -> exp - exp .)
+    MOD             reduce using rule 37 (exp -> exp - exp .)
+    AND             reduce using rule 37 (exp -> exp - exp .)
+    OR              reduce using rule 37 (exp -> exp - exp .)
+    ;               reduce using rule 37 (exp -> exp - exp .)
+    VOID_TYPE       reduce using rule 37 (exp -> exp - exp .)
+    PRINT           reduce using rule 37 (exp -> exp - exp .)
+    ID              reduce using rule 37 (exp -> exp - exp .)
+    RETURN          reduce using rule 37 (exp -> exp - exp .)
+    WHILE           reduce using rule 37 (exp -> exp - exp .)
+    IF              reduce using rule 37 (exp -> exp - exp .)
+    {               reduce using rule 37 (exp -> exp - exp .)
+    INTEGER_TYPE    reduce using rule 37 (exp -> exp - exp .)
+    DOUBLE_TYPE     reduce using rule 37 (exp -> exp - exp .)
+    STRING_TYPE     reduce using rule 37 (exp -> exp - exp .)
+    $end            reduce using rule 37 (exp -> exp - exp .)
+    }               reduce using rule 37 (exp -> exp - exp .)
+    ELSE            reduce using rule 37 (exp -> exp - exp .)
+    ,               reduce using rule 37 (exp -> exp - exp .)
+    )               reduce using rule 37 (exp -> exp - exp .)
+    ]               reduce using rule 37 (exp -> exp - exp .)
+    *               shift and go to state 54
+    /               shift and go to state 55
+
+  ! *               [ reduce using rule 37 (exp -> exp - exp .) ]
+  ! /               [ reduce using rule 37 (exp -> exp - exp .) ]
+  ! +               [ shift and go to state 52 ]
+  ! -               [ shift and go to state 53 ]
+  ! EQ              [ shift and go to state 56 ]
+  ! LE              [ shift and go to state 57 ]
+  ! GE              [ shift and go to state 58 ]
+  ! LT              [ shift and go to state 59 ]
+  ! GT              [ shift and go to state 60 ]
+  ! NE              [ shift and go to state 61 ]
+  ! MOD             [ shift and go to state 62 ]
+  ! AND             [ shift and go to state 63 ]
+  ! OR              [ shift and go to state 64 ]
+
+
+state 90
+
+    (38) exp -> exp * exp .
+    (36) exp -> exp . + exp
+    (37) exp -> exp . - exp
+    (38) exp -> exp . * exp
+    (39) exp -> exp . / exp
+    (40) exp -> exp . EQ exp
+    (41) exp -> exp . LE exp
+    (42) exp -> exp . GE exp
+    (43) exp -> exp . LT exp
+    (44) exp -> exp . GT exp
+    (45) exp -> exp . NE exp
+    (46) exp -> exp . MOD exp
+    (47) exp -> exp . AND exp
+    (48) exp -> exp . OR exp
+
+    +               reduce using rule 38 (exp -> exp * exp .)
+    -               reduce using rule 38 (exp -> exp * exp .)
+    *               reduce using rule 38 (exp -> exp * exp .)
+    /               reduce using rule 38 (exp -> exp * exp .)
+    EQ              reduce using rule 38 (exp -> exp * exp .)
+    LE              reduce using rule 38 (exp -> exp * exp .)
+    GE              reduce using rule 38 (exp -> exp * exp .)
+    LT              reduce using rule 38 (exp -> exp * exp .)
+    GT              reduce using rule 38 (exp -> exp * exp .)
+    NE              reduce using rule 38 (exp -> exp * exp .)
+    MOD             reduce using rule 38 (exp -> exp * exp .)
+    AND             reduce using rule 38 (exp -> exp * exp .)
+    OR              reduce using rule 38 (exp -> exp * exp .)
+    ;               reduce using rule 38 (exp -> exp * exp .)
+    VOID_TYPE       reduce using rule 38 (exp -> exp * exp .)
+    PRINT           reduce using rule 38 (exp -> exp * exp .)
+    ID              reduce using rule 38 (exp -> exp * exp .)
+    RETURN          reduce using rule 38 (exp -> exp * exp .)
+    WHILE           reduce using rule 38 (exp -> exp * exp .)
+    IF              reduce using rule 38 (exp -> exp * exp .)
+    {               reduce using rule 38 (exp -> exp * exp .)
+    INTEGER_TYPE    reduce using rule 38 (exp -> exp * exp .)
+    DOUBLE_TYPE     reduce using rule 38 (exp -> exp * exp .)
+    STRING_TYPE     reduce using rule 38 (exp -> exp * exp .)
+    $end            reduce using rule 38 (exp -> exp * exp .)
+    }               reduce using rule 38 (exp -> exp * exp .)
+    ELSE            reduce using rule 38 (exp -> exp * exp .)
+    ,               reduce using rule 38 (exp -> exp * exp .)
+    )               reduce using rule 38 (exp -> exp * exp .)
+    ]               reduce using rule 38 (exp -> exp * exp .)
+
+  ! +               [ shift and go to state 52 ]
+  ! -               [ shift and go to state 53 ]
+  ! *               [ shift and go to state 54 ]
+  ! /               [ shift and go to state 55 ]
+  ! EQ              [ shift and go to state 56 ]
+  ! LE              [ shift and go to state 57 ]
+  ! GE              [ shift and go to state 58 ]
+  ! LT              [ shift and go to state 59 ]
+  ! GT              [ shift and go to state 60 ]
+  ! NE              [ shift and go to state 61 ]
+  ! MOD             [ shift and go to state 62 ]
+  ! AND             [ shift and go to state 63 ]
+  ! OR              [ shift and go to state 64 ]
+
+
+state 91
+
+    (39) exp -> exp / exp .
+    (36) exp -> exp . + exp
+    (37) exp -> exp . - exp
+    (38) exp -> exp . * exp
+    (39) exp -> exp . / exp
+    (40) exp -> exp . EQ exp
+    (41) exp -> exp . LE exp
+    (42) exp -> exp . GE exp
+    (43) exp -> exp . LT exp
+    (44) exp -> exp . GT exp
+    (45) exp -> exp . NE exp
+    (46) exp -> exp . MOD exp
+    (47) exp -> exp . AND exp
+    (48) exp -> exp . OR exp
+
+    +               reduce using rule 39 (exp -> exp / exp .)
+    -               reduce using rule 39 (exp -> exp / exp .)
+    *               reduce using rule 39 (exp -> exp / exp .)
+    /               reduce using rule 39 (exp -> exp / exp .)
+    EQ              reduce using rule 39 (exp -> exp / exp .)
+    LE              reduce using rule 39 (exp -> exp / exp .)
+    GE              reduce using rule 39 (exp -> exp / exp .)
+    LT              reduce using rule 39 (exp -> exp / exp .)
+    GT              reduce using rule 39 (exp -> exp / exp .)
+    NE              reduce using rule 39 (exp -> exp / exp .)
+    MOD             reduce using rule 39 (exp -> exp / exp .)
+    AND             reduce using rule 39 (exp -> exp / exp .)
+    OR              reduce using rule 39 (exp -> exp / exp .)
+    ;               reduce using rule 39 (exp -> exp / exp .)
+    VOID_TYPE       reduce using rule 39 (exp -> exp / exp .)
+    PRINT           reduce using rule 39 (exp -> exp / exp .)
+    ID              reduce using rule 39 (exp -> exp / exp .)
+    RETURN          reduce using rule 39 (exp -> exp / exp .)
+    WHILE           reduce using rule 39 (exp -> exp / exp .)
+    IF              reduce using rule 39 (exp -> exp / exp .)
+    {               reduce using rule 39 (exp -> exp / exp .)
+    INTEGER_TYPE    reduce using rule 39 (exp -> exp / exp .)
+    DOUBLE_TYPE     reduce using rule 39 (exp -> exp / exp .)
+    STRING_TYPE     reduce using rule 39 (exp -> exp / exp .)
+    $end            reduce using rule 39 (exp -> exp / exp .)
+    }               reduce using rule 39 (exp -> exp / exp .)
+    ELSE            reduce using rule 39 (exp -> exp / exp .)
+    ,               reduce using rule 39 (exp -> exp / exp .)
+    )               reduce using rule 39 (exp -> exp / exp .)
+    ]               reduce using rule 39 (exp -> exp / exp .)
+
+  ! +               [ shift and go to state 52 ]
+  ! -               [ shift and go to state 53 ]
+  ! *               [ shift and go to state 54 ]
+  ! /               [ shift and go to state 55 ]
+  ! EQ              [ shift and go to state 56 ]
+  ! LE              [ shift and go to state 57 ]
+  ! GE              [ shift and go to state 58 ]
+  ! LT              [ shift and go to state 59 ]
+  ! GT              [ shift and go to state 60 ]
+  ! NE              [ shift and go to state 61 ]
+  ! MOD             [ shift and go to state 62 ]
+  ! AND             [ shift and go to state 63 ]
+  ! OR              [ shift and go to state 64 ]
+
+
+state 92
+
+    (40) exp -> exp EQ exp .
+    (36) exp -> exp . + exp
+    (37) exp -> exp . - exp
+    (38) exp -> exp . * exp
+    (39) exp -> exp . / exp
+    (40) exp -> exp . EQ exp
+    (41) exp -> exp . LE exp
+    (42) exp -> exp . GE exp
+    (43) exp -> exp . LT exp
+    (44) exp -> exp . GT exp
+    (45) exp -> exp . NE exp
+    (46) exp -> exp . MOD exp
+    (47) exp -> exp . AND exp
+    (48) exp -> exp . OR exp
+
+    EQ              reduce using rule 40 (exp -> exp EQ exp .)
+    LE              reduce using rule 40 (exp -> exp EQ exp .)
+    GE              reduce using rule 40 (exp -> exp EQ exp .)
+    LT              reduce using rule 40 (exp -> exp EQ exp .)
+    GT              reduce using rule 40 (exp -> exp EQ exp .)
+    NE              reduce using rule 40 (exp -> exp EQ exp .)
+    MOD             reduce using rule 40 (exp -> exp EQ exp .)
+    ;               reduce using rule 40 (exp -> exp EQ exp .)
+    VOID_TYPE       reduce using rule 40 (exp -> exp EQ exp .)
+    PRINT           reduce using rule 40 (exp -> exp EQ exp .)
+    ID              reduce using rule 40 (exp -> exp EQ exp .)
+    RETURN          reduce using rule 40 (exp -> exp EQ exp .)
+    WHILE           reduce using rule 40 (exp -> exp EQ exp .)
+    IF              reduce using rule 40 (exp -> exp EQ exp .)
+    {               reduce using rule 40 (exp -> exp EQ exp .)
+    INTEGER_TYPE    reduce using rule 40 (exp -> exp EQ exp .)
+    DOUBLE_TYPE     reduce using rule 40 (exp -> exp EQ exp .)
+    STRING_TYPE     reduce using rule 40 (exp -> exp EQ exp .)
+    $end            reduce using rule 40 (exp -> exp EQ exp .)
+    }               reduce using rule 40 (exp -> exp EQ exp .)
+    ELSE            reduce using rule 40 (exp -> exp EQ exp .)
+    ,               reduce using rule 40 (exp -> exp EQ exp .)
+    )               reduce using rule 40 (exp -> exp EQ exp .)
+    ]               reduce using rule 40 (exp -> exp EQ exp .)
+    +               shift and go to state 52
+    -               shift and go to state 53
+    *               shift and go to state 54
+    /               shift and go to state 55
+    AND             shift and go to state 63
+    OR              shift and go to state 64
+
+  ! +               [ reduce using rule 40 (exp -> exp EQ exp .) ]
+  ! -               [ reduce using rule 40 (exp -> exp EQ exp .) ]
+  ! *               [ reduce using rule 40 (exp -> exp EQ exp .) ]
+  ! /               [ reduce using rule 40 (exp -> exp EQ exp .) ]
+  ! AND             [ reduce using rule 40 (exp -> exp EQ exp .) ]
+  ! OR              [ reduce using rule 40 (exp -> exp EQ exp .) ]
+  ! EQ              [ shift and go to state 56 ]
+  ! LE              [ shift and go to state 57 ]
+  ! GE              [ shift and go to state 58 ]
+  ! LT              [ shift and go to state 59 ]
+  ! GT              [ shift and go to state 60 ]
+  ! NE              [ shift and go to state 61 ]
+  ! MOD             [ shift and go to state 62 ]
+
+
+state 93
+
+    (41) exp -> exp LE exp .
+    (36) exp -> exp . + exp
+    (37) exp -> exp . - exp
+    (38) exp -> exp . * exp
+    (39) exp -> exp . / exp
+    (40) exp -> exp . EQ exp
+    (41) exp -> exp . LE exp
+    (42) exp -> exp . GE exp
+    (43) exp -> exp . LT exp
+    (44) exp -> exp . GT exp
+    (45) exp -> exp . NE exp
+    (46) exp -> exp . MOD exp
+    (47) exp -> exp . AND exp
+    (48) exp -> exp . OR exp
+
+    EQ              reduce using rule 41 (exp -> exp LE exp .)
+    LE              reduce using rule 41 (exp -> exp LE exp .)
+    GE              reduce using rule 41 (exp -> exp LE exp .)
+    LT              reduce using rule 41 (exp -> exp LE exp .)
+    GT              reduce using rule 41 (exp -> exp LE exp .)
+    NE              reduce using rule 41 (exp -> exp LE exp .)
+    MOD             reduce using rule 41 (exp -> exp LE exp .)
+    ;               reduce using rule 41 (exp -> exp LE exp .)
+    VOID_TYPE       reduce using rule 41 (exp -> exp LE exp .)
+    PRINT           reduce using rule 41 (exp -> exp LE exp .)
+    ID              reduce using rule 41 (exp -> exp LE exp .)
+    RETURN          reduce using rule 41 (exp -> exp LE exp .)
+    WHILE           reduce using rule 41 (exp -> exp LE exp .)
+    IF              reduce using rule 41 (exp -> exp LE exp .)
+    {               reduce using rule 41 (exp -> exp LE exp .)
+    INTEGER_TYPE    reduce using rule 41 (exp -> exp LE exp .)
+    DOUBLE_TYPE     reduce using rule 41 (exp -> exp LE exp .)
+    STRING_TYPE     reduce using rule 41 (exp -> exp LE exp .)
+    $end            reduce using rule 41 (exp -> exp LE exp .)
+    }               reduce using rule 41 (exp -> exp LE exp .)
+    ELSE            reduce using rule 41 (exp -> exp LE exp .)
+    ,               reduce using rule 41 (exp -> exp LE exp .)
+    )               reduce using rule 41 (exp -> exp LE exp .)
+    ]               reduce using rule 41 (exp -> exp LE exp .)
+    +               shift and go to state 52
+    -               shift and go to state 53
+    *               shift and go to state 54
+    /               shift and go to state 55
+    AND             shift and go to state 63
+    OR              shift and go to state 64
+
+  ! +               [ reduce using rule 41 (exp -> exp LE exp .) ]
+  ! -               [ reduce using rule 41 (exp -> exp LE exp .) ]
+  ! *               [ reduce using rule 41 (exp -> exp LE exp .) ]
+  ! /               [ reduce using rule 41 (exp -> exp LE exp .) ]
+  ! AND             [ reduce using rule 41 (exp -> exp LE exp .) ]
+  ! OR              [ reduce using rule 41 (exp -> exp LE exp .) ]
+  ! EQ              [ shift and go to state 56 ]
+  ! LE              [ shift and go to state 57 ]
+  ! GE              [ shift and go to state 58 ]
+  ! LT              [ shift and go to state 59 ]
+  ! GT              [ shift and go to state 60 ]
+  ! NE              [ shift and go to state 61 ]
+  ! MOD             [ shift and go to state 62 ]
+
+
+state 94
+
+    (42) exp -> exp GE exp .
+    (36) exp -> exp . + exp
+    (37) exp -> exp . - exp
+    (38) exp -> exp . * exp
+    (39) exp -> exp . / exp
+    (40) exp -> exp . EQ exp
+    (41) exp -> exp . LE exp
+    (42) exp -> exp . GE exp
+    (43) exp -> exp . LT exp
+    (44) exp -> exp . GT exp
+    (45) exp -> exp . NE exp
+    (46) exp -> exp . MOD exp
+    (47) exp -> exp . AND exp
+    (48) exp -> exp . OR exp
+
+    EQ              reduce using rule 42 (exp -> exp GE exp .)
+    LE              reduce using rule 42 (exp -> exp GE exp .)
+    GE              reduce using rule 42 (exp -> exp GE exp .)
+    LT              reduce using rule 42 (exp -> exp GE exp .)
+    GT              reduce using rule 42 (exp -> exp GE exp .)
+    NE              reduce using rule 42 (exp -> exp GE exp .)
+    MOD             reduce using rule 42 (exp -> exp GE exp .)
+    ;               reduce using rule 42 (exp -> exp GE exp .)
+    VOID_TYPE       reduce using rule 42 (exp -> exp GE exp .)
+    PRINT           reduce using rule 42 (exp -> exp GE exp .)
+    ID              reduce using rule 42 (exp -> exp GE exp .)
+    RETURN          reduce using rule 42 (exp -> exp GE exp .)
+    WHILE           reduce using rule 42 (exp -> exp GE exp .)
+    IF              reduce using rule 42 (exp -> exp GE exp .)
+    {               reduce using rule 42 (exp -> exp GE exp .)
+    INTEGER_TYPE    reduce using rule 42 (exp -> exp GE exp .)
+    DOUBLE_TYPE     reduce using rule 42 (exp -> exp GE exp .)
+    STRING_TYPE     reduce using rule 42 (exp -> exp GE exp .)
+    $end            reduce using rule 42 (exp -> exp GE exp .)
+    }               reduce using rule 42 (exp -> exp GE exp .)
+    ELSE            reduce using rule 42 (exp -> exp GE exp .)
+    ,               reduce using rule 42 (exp -> exp GE exp .)
+    )               reduce using rule 42 (exp -> exp GE exp .)
+    ]               reduce using rule 42 (exp -> exp GE exp .)
+    +               shift and go to state 52
+    -               shift and go to state 53
+    *               shift and go to state 54
+    /               shift and go to state 55
+    AND             shift and go to state 63
+    OR              shift and go to state 64
+
+  ! +               [ reduce using rule 42 (exp -> exp GE exp .) ]
+  ! -               [ reduce using rule 42 (exp -> exp GE exp .) ]
+  ! *               [ reduce using rule 42 (exp -> exp GE exp .) ]
+  ! /               [ reduce using rule 42 (exp -> exp GE exp .) ]
+  ! AND             [ reduce using rule 42 (exp -> exp GE exp .) ]
+  ! OR              [ reduce using rule 42 (exp -> exp GE exp .) ]
+  ! EQ              [ shift and go to state 56 ]
+  ! LE              [ shift and go to state 57 ]
+  ! GE              [ shift and go to state 58 ]
+  ! LT              [ shift and go to state 59 ]
+  ! GT              [ shift and go to state 60 ]
+  ! NE              [ shift and go to state 61 ]
+  ! MOD             [ shift and go to state 62 ]
+
+
+state 95
+
+    (43) exp -> exp LT exp .
+    (36) exp -> exp . + exp
+    (37) exp -> exp . - exp
+    (38) exp -> exp . * exp
+    (39) exp -> exp . / exp
+    (40) exp -> exp . EQ exp
+    (41) exp -> exp . LE exp
+    (42) exp -> exp . GE exp
+    (43) exp -> exp . LT exp
+    (44) exp -> exp . GT exp
+    (45) exp -> exp . NE exp
+    (46) exp -> exp . MOD exp
+    (47) exp -> exp . AND exp
+    (48) exp -> exp . OR exp
+
+    EQ              reduce using rule 43 (exp -> exp LT exp .)
+    LE              reduce using rule 43 (exp -> exp LT exp .)
+    GE              reduce using rule 43 (exp -> exp LT exp .)
+    LT              reduce using rule 43 (exp -> exp LT exp .)
+    GT              reduce using rule 43 (exp -> exp LT exp .)
+    NE              reduce using rule 43 (exp -> exp LT exp .)
+    MOD             reduce using rule 43 (exp -> exp LT exp .)
+    ;               reduce using rule 43 (exp -> exp LT exp .)
+    VOID_TYPE       reduce using rule 43 (exp -> exp LT exp .)
+    PRINT           reduce using rule 43 (exp -> exp LT exp .)
+    ID              reduce using rule 43 (exp -> exp LT exp .)
+    RETURN          reduce using rule 43 (exp -> exp LT exp .)
+    WHILE           reduce using rule 43 (exp -> exp LT exp .)
+    IF              reduce using rule 43 (exp -> exp LT exp .)
+    {               reduce using rule 43 (exp -> exp LT exp .)
+    INTEGER_TYPE    reduce using rule 43 (exp -> exp LT exp .)
+    DOUBLE_TYPE     reduce using rule 43 (exp -> exp LT exp .)
+    STRING_TYPE     reduce using rule 43 (exp -> exp LT exp .)
+    $end            reduce using rule 43 (exp -> exp LT exp .)
+    }               reduce using rule 43 (exp -> exp LT exp .)
+    ELSE            reduce using rule 43 (exp -> exp LT exp .)
+    ,               reduce using rule 43 (exp -> exp LT exp .)
+    )               reduce using rule 43 (exp -> exp LT exp .)
+    ]               reduce using rule 43 (exp -> exp LT exp .)
+    +               shift and go to state 52
+    -               shift and go to state 53
+    *               shift and go to state 54
+    /               shift and go to state 55
+    AND             shift and go to state 63
+    OR              shift and go to state 64
+
+  ! +               [ reduce using rule 43 (exp -> exp LT exp .) ]
+  ! -               [ reduce using rule 43 (exp -> exp LT exp .) ]
+  ! *               [ reduce using rule 43 (exp -> exp LT exp .) ]
+  ! /               [ reduce using rule 43 (exp -> exp LT exp .) ]
+  ! AND             [ reduce using rule 43 (exp -> exp LT exp .) ]
+  ! OR              [ reduce using rule 43 (exp -> exp LT exp .) ]
+  ! EQ              [ shift and go to state 56 ]
+  ! LE              [ shift and go to state 57 ]
+  ! GE              [ shift and go to state 58 ]
+  ! LT              [ shift and go to state 59 ]
+  ! GT              [ shift and go to state 60 ]
+  ! NE              [ shift and go to state 61 ]
+  ! MOD             [ shift and go to state 62 ]
+
+
+state 96
+
+    (44) exp -> exp GT exp .
+    (36) exp -> exp . + exp
+    (37) exp -> exp . - exp
+    (38) exp -> exp . * exp
+    (39) exp -> exp . / exp
+    (40) exp -> exp . EQ exp
+    (41) exp -> exp . LE exp
+    (42) exp -> exp . GE exp
+    (43) exp -> exp . LT exp
+    (44) exp -> exp . GT exp
+    (45) exp -> exp . NE exp
+    (46) exp -> exp . MOD exp
+    (47) exp -> exp . AND exp
+    (48) exp -> exp . OR exp
+
+    EQ              reduce using rule 44 (exp -> exp GT exp .)
+    LE              reduce using rule 44 (exp -> exp GT exp .)
+    GE              reduce using rule 44 (exp -> exp GT exp .)
+    LT              reduce using rule 44 (exp -> exp GT exp .)
+    GT              reduce using rule 44 (exp -> exp GT exp .)
+    NE              reduce using rule 44 (exp -> exp GT exp .)
+    MOD             reduce using rule 44 (exp -> exp GT exp .)
+    ;               reduce using rule 44 (exp -> exp GT exp .)
+    VOID_TYPE       reduce using rule 44 (exp -> exp GT exp .)
+    PRINT           reduce using rule 44 (exp -> exp GT exp .)
+    ID              reduce using rule 44 (exp -> exp GT exp .)
+    RETURN          reduce using rule 44 (exp -> exp GT exp .)
+    WHILE           reduce using rule 44 (exp -> exp GT exp .)
+    IF              reduce using rule 44 (exp -> exp GT exp .)
+    {               reduce using rule 44 (exp -> exp GT exp .)
+    INTEGER_TYPE    reduce using rule 44 (exp -> exp GT exp .)
+    DOUBLE_TYPE     reduce using rule 44 (exp -> exp GT exp .)
+    STRING_TYPE     reduce using rule 44 (exp -> exp GT exp .)
+    $end            reduce using rule 44 (exp -> exp GT exp .)
+    }               reduce using rule 44 (exp -> exp GT exp .)
+    ELSE            reduce using rule 44 (exp -> exp GT exp .)
+    ,               reduce using rule 44 (exp -> exp GT exp .)
+    )               reduce using rule 44 (exp -> exp GT exp .)
+    ]               reduce using rule 44 (exp -> exp GT exp .)
+    +               shift and go to state 52
+    -               shift and go to state 53
+    *               shift and go to state 54
+    /               shift and go to state 55
+    AND             shift and go to state 63
+    OR              shift and go to state 64
+
+  ! +               [ reduce using rule 44 (exp -> exp GT exp .) ]
+  ! -               [ reduce using rule 44 (exp -> exp GT exp .) ]
+  ! *               [ reduce using rule 44 (exp -> exp GT exp .) ]
+  ! /               [ reduce using rule 44 (exp -> exp GT exp .) ]
+  ! AND             [ reduce using rule 44 (exp -> exp GT exp .) ]
+  ! OR              [ reduce using rule 44 (exp -> exp GT exp .) ]
+  ! EQ              [ shift and go to state 56 ]
+  ! LE              [ shift and go to state 57 ]
+  ! GE              [ shift and go to state 58 ]
+  ! LT              [ shift and go to state 59 ]
+  ! GT              [ shift and go to state 60 ]
+  ! NE              [ shift and go to state 61 ]
+  ! MOD             [ shift and go to state 62 ]
+
+
+state 97
+
+    (45) exp -> exp NE exp .
+    (36) exp -> exp . + exp
+    (37) exp -> exp . - exp
+    (38) exp -> exp . * exp
+    (39) exp -> exp . / exp
+    (40) exp -> exp . EQ exp
+    (41) exp -> exp . LE exp
+    (42) exp -> exp . GE exp
+    (43) exp -> exp . LT exp
+    (44) exp -> exp . GT exp
+    (45) exp -> exp . NE exp
+    (46) exp -> exp . MOD exp
+    (47) exp -> exp . AND exp
+    (48) exp -> exp . OR exp
+
+    EQ              reduce using rule 45 (exp -> exp NE exp .)
+    LE              reduce using rule 45 (exp -> exp NE exp .)
+    GE              reduce using rule 45 (exp -> exp NE exp .)
+    LT              reduce using rule 45 (exp -> exp NE exp .)
+    GT              reduce using rule 45 (exp -> exp NE exp .)
+    NE              reduce using rule 45 (exp -> exp NE exp .)
+    MOD             reduce using rule 45 (exp -> exp NE exp .)
+    ;               reduce using rule 45 (exp -> exp NE exp .)
+    VOID_TYPE       reduce using rule 45 (exp -> exp NE exp .)
+    PRINT           reduce using rule 45 (exp -> exp NE exp .)
+    ID              reduce using rule 45 (exp -> exp NE exp .)
+    RETURN          reduce using rule 45 (exp -> exp NE exp .)
+    WHILE           reduce using rule 45 (exp -> exp NE exp .)
+    IF              reduce using rule 45 (exp -> exp NE exp .)
+    {               reduce using rule 45 (exp -> exp NE exp .)
+    INTEGER_TYPE    reduce using rule 45 (exp -> exp NE exp .)
+    DOUBLE_TYPE     reduce using rule 45 (exp -> exp NE exp .)
+    STRING_TYPE     reduce using rule 45 (exp -> exp NE exp .)
+    $end            reduce using rule 45 (exp -> exp NE exp .)
+    }               reduce using rule 45 (exp -> exp NE exp .)
+    ELSE            reduce using rule 45 (exp -> exp NE exp .)
+    ,               reduce using rule 45 (exp -> exp NE exp .)
+    )               reduce using rule 45 (exp -> exp NE exp .)
+    ]               reduce using rule 45 (exp -> exp NE exp .)
+    +               shift and go to state 52
+    -               shift and go to state 53
+    *               shift and go to state 54
+    /               shift and go to state 55
+    AND             shift and go to state 63
+    OR              shift and go to state 64
+
+  ! +               [ reduce using rule 45 (exp -> exp NE exp .) ]
+  ! -               [ reduce using rule 45 (exp -> exp NE exp .) ]
+  ! *               [ reduce using rule 45 (exp -> exp NE exp .) ]
+  ! /               [ reduce using rule 45 (exp -> exp NE exp .) ]
+  ! AND             [ reduce using rule 45 (exp -> exp NE exp .) ]
+  ! OR              [ reduce using rule 45 (exp -> exp NE exp .) ]
+  ! EQ              [ shift and go to state 56 ]
+  ! LE              [ shift and go to state 57 ]
+  ! GE              [ shift and go to state 58 ]
+  ! LT              [ shift and go to state 59 ]
+  ! GT              [ shift and go to state 60 ]
+  ! NE              [ shift and go to state 61 ]
+  ! MOD             [ shift and go to state 62 ]
+
+
+state 98
+
+    (46) exp -> exp MOD exp .
+    (36) exp -> exp . + exp
+    (37) exp -> exp . - exp
+    (38) exp -> exp . * exp
+    (39) exp -> exp . / exp
+    (40) exp -> exp . EQ exp
+    (41) exp -> exp . LE exp
+    (42) exp -> exp . GE exp
+    (43) exp -> exp . LT exp
+    (44) exp -> exp . GT exp
+    (45) exp -> exp . NE exp
+    (46) exp -> exp . MOD exp
+    (47) exp -> exp . AND exp
+    (48) exp -> exp . OR exp
+
+  ! shift/reduce conflict for + resolved as shift
+  ! shift/reduce conflict for - resolved as shift
+  ! shift/reduce conflict for * resolved as shift
+  ! shift/reduce conflict for / resolved as shift
+  ! shift/reduce conflict for EQ resolved as shift
+  ! shift/reduce conflict for LE resolved as shift
+  ! shift/reduce conflict for GE resolved as shift
+  ! shift/reduce conflict for LT resolved as shift
+  ! shift/reduce conflict for GT resolved as shift
+  ! shift/reduce conflict for NE resolved as shift
+  ! shift/reduce conflict for MOD resolved as shift
+  ! shift/reduce conflict for AND resolved as shift
+  ! shift/reduce conflict for OR resolved as shift
+    ;               reduce using rule 46 (exp -> exp MOD exp .)
+    VOID_TYPE       reduce using rule 46 (exp -> exp MOD exp .)
+    PRINT           reduce using rule 46 (exp -> exp MOD exp .)
+    ID              reduce using rule 46 (exp -> exp MOD exp .)
+    RETURN          reduce using rule 46 (exp -> exp MOD exp .)
+    WHILE           reduce using rule 46 (exp -> exp MOD exp .)
+    IF              reduce using rule 46 (exp -> exp MOD exp .)
+    {               reduce using rule 46 (exp -> exp MOD exp .)
+    INTEGER_TYPE    reduce using rule 46 (exp -> exp MOD exp .)
+    DOUBLE_TYPE     reduce using rule 46 (exp -> exp MOD exp .)
+    STRING_TYPE     reduce using rule 46 (exp -> exp MOD exp .)
+    $end            reduce using rule 46 (exp -> exp MOD exp .)
+    }               reduce using rule 46 (exp -> exp MOD exp .)
+    ELSE            reduce using rule 46 (exp -> exp MOD exp .)
+    ,               reduce using rule 46 (exp -> exp MOD exp .)
+    )               reduce using rule 46 (exp -> exp MOD exp .)
+    ]               reduce using rule 46 (exp -> exp MOD exp .)
+    +               shift and go to state 52
+    -               shift and go to state 53
+    *               shift and go to state 54
+    /               shift and go to state 55
+    EQ              shift and go to state 56
+    LE              shift and go to state 57
+    GE              shift and go to state 58
+    LT              shift and go to state 59
+    GT              shift and go to state 60
+    NE              shift and go to state 61
+    MOD             shift and go to state 62
+    AND             shift and go to state 63
+    OR              shift and go to state 64
+
+  ! +               [ reduce using rule 46 (exp -> exp MOD exp .) ]
+  ! -               [ reduce using rule 46 (exp -> exp MOD exp .) ]
+  ! *               [ reduce using rule 46 (exp -> exp MOD exp .) ]
+  ! /               [ reduce using rule 46 (exp -> exp MOD exp .) ]
+  ! EQ              [ reduce using rule 46 (exp -> exp MOD exp .) ]
+  ! LE              [ reduce using rule 46 (exp -> exp MOD exp .) ]
+  ! GE              [ reduce using rule 46 (exp -> exp MOD exp .) ]
+  ! LT              [ reduce using rule 46 (exp -> exp MOD exp .) ]
+  ! GT              [ reduce using rule 46 (exp -> exp MOD exp .) ]
+  ! NE              [ reduce using rule 46 (exp -> exp MOD exp .) ]
+  ! MOD             [ reduce using rule 46 (exp -> exp MOD exp .) ]
+  ! AND             [ reduce using rule 46 (exp -> exp MOD exp .) ]
+  ! OR              [ reduce using rule 46 (exp -> exp MOD exp .) ]
+
+
+state 99
+
+    (47) exp -> exp AND exp .
+    (36) exp -> exp . + exp
+    (37) exp -> exp . - exp
+    (38) exp -> exp . * exp
+    (39) exp -> exp . / exp
+    (40) exp -> exp . EQ exp
+    (41) exp -> exp . LE exp
+    (42) exp -> exp . GE exp
+    (43) exp -> exp . LT exp
+    (44) exp -> exp . GT exp
+    (45) exp -> exp . NE exp
+    (46) exp -> exp . MOD exp
+    (47) exp -> exp . AND exp
+    (48) exp -> exp . OR exp
+
+    EQ              reduce using rule 47 (exp -> exp AND exp .)
+    LE              reduce using rule 47 (exp -> exp AND exp .)
+    GE              reduce using rule 47 (exp -> exp AND exp .)
+    LT              reduce using rule 47 (exp -> exp AND exp .)
+    GT              reduce using rule 47 (exp -> exp AND exp .)
+    NE              reduce using rule 47 (exp -> exp AND exp .)
+    MOD             reduce using rule 47 (exp -> exp AND exp .)
+    AND             reduce using rule 47 (exp -> exp AND exp .)
+    OR              reduce using rule 47 (exp -> exp AND exp .)
+    ;               reduce using rule 47 (exp -> exp AND exp .)
+    VOID_TYPE       reduce using rule 47 (exp -> exp AND exp .)
+    PRINT           reduce using rule 47 (exp -> exp AND exp .)
+    ID              reduce using rule 47 (exp -> exp AND exp .)
+    RETURN          reduce using rule 47 (exp -> exp AND exp .)
+    WHILE           reduce using rule 47 (exp -> exp AND exp .)
+    IF              reduce using rule 47 (exp -> exp AND exp .)
+    {               reduce using rule 47 (exp -> exp AND exp .)
+    INTEGER_TYPE    reduce using rule 47 (exp -> exp AND exp .)
+    DOUBLE_TYPE     reduce using rule 47 (exp -> exp AND exp .)
+    STRING_TYPE     reduce using rule 47 (exp -> exp AND exp .)
+    $end            reduce using rule 47 (exp -> exp AND exp .)
+    }               reduce using rule 47 (exp -> exp AND exp .)
+    ELSE            reduce using rule 47 (exp -> exp AND exp .)
+    ,               reduce using rule 47 (exp -> exp AND exp .)
+    )               reduce using rule 47 (exp -> exp AND exp .)
+    ]               reduce using rule 47 (exp -> exp AND exp .)
+    +               shift and go to state 52
+    -               shift and go to state 53
+    *               shift and go to state 54
+    /               shift and go to state 55
+
+  ! +               [ reduce using rule 47 (exp -> exp AND exp .) ]
+  ! -               [ reduce using rule 47 (exp -> exp AND exp .) ]
+  ! *               [ reduce using rule 47 (exp -> exp AND exp .) ]
+  ! /               [ reduce using rule 47 (exp -> exp AND exp .) ]
+  ! EQ              [ shift and go to state 56 ]
+  ! LE              [ shift and go to state 57 ]
+  ! GE              [ shift and go to state 58 ]
+  ! LT              [ shift and go to state 59 ]
+  ! GT              [ shift and go to state 60 ]
+  ! NE              [ shift and go to state 61 ]
+  ! MOD             [ shift and go to state 62 ]
+  ! AND             [ shift and go to state 63 ]
+  ! OR              [ shift and go to state 64 ]
+
+
+state 100
+
+    (48) exp -> exp OR exp .
+    (36) exp -> exp . + exp
+    (37) exp -> exp . - exp
+    (38) exp -> exp . * exp
+    (39) exp -> exp . / exp
+    (40) exp -> exp . EQ exp
+    (41) exp -> exp . LE exp
+    (42) exp -> exp . GE exp
+    (43) exp -> exp . LT exp
+    (44) exp -> exp . GT exp
+    (45) exp -> exp . NE exp
+    (46) exp -> exp . MOD exp
+    (47) exp -> exp . AND exp
+    (48) exp -> exp . OR exp
+
+    EQ              reduce using rule 48 (exp -> exp OR exp .)
+    LE              reduce using rule 48 (exp -> exp OR exp .)
+    GE              reduce using rule 48 (exp -> exp OR exp .)
+    LT              reduce using rule 48 (exp -> exp OR exp .)
+    GT              reduce using rule 48 (exp -> exp OR exp .)
+    NE              reduce using rule 48 (exp -> exp OR exp .)
+    MOD             reduce using rule 48 (exp -> exp OR exp .)
+    AND             reduce using rule 48 (exp -> exp OR exp .)
+    OR              reduce using rule 48 (exp -> exp OR exp .)
+    ;               reduce using rule 48 (exp -> exp OR exp .)
+    VOID_TYPE       reduce using rule 48 (exp -> exp OR exp .)
+    PRINT           reduce using rule 48 (exp -> exp OR exp .)
+    ID              reduce using rule 48 (exp -> exp OR exp .)
+    RETURN          reduce using rule 48 (exp -> exp OR exp .)
+    WHILE           reduce using rule 48 (exp -> exp OR exp .)
+    IF              reduce using rule 48 (exp -> exp OR exp .)
+    {               reduce using rule 48 (exp -> exp OR exp .)
+    INTEGER_TYPE    reduce using rule 48 (exp -> exp OR exp .)
+    DOUBLE_TYPE     reduce using rule 48 (exp -> exp OR exp .)
+    STRING_TYPE     reduce using rule 48 (exp -> exp OR exp .)
+    $end            reduce using rule 48 (exp -> exp OR exp .)
+    }               reduce using rule 48 (exp -> exp OR exp .)
+    ELSE            reduce using rule 48 (exp -> exp OR exp .)
+    ,               reduce using rule 48 (exp -> exp OR exp .)
+    )               reduce using rule 48 (exp -> exp OR exp .)
+    ]               reduce using rule 48 (exp -> exp OR exp .)
+    +               shift and go to state 52
+    -               shift and go to state 53
+    *               shift and go to state 54
+    /               shift and go to state 55
+
+  ! +               [ reduce using rule 48 (exp -> exp OR exp .) ]
+  ! -               [ reduce using rule 48 (exp -> exp OR exp .) ]
+  ! *               [ reduce using rule 48 (exp -> exp OR exp .) ]
+  ! /               [ reduce using rule 48 (exp -> exp OR exp .) ]
+  ! EQ              [ shift and go to state 56 ]
+  ! LE              [ shift and go to state 57 ]
+  ! GE              [ shift and go to state 58 ]
+  ! LT              [ shift and go to state 59 ]
+  ! GT              [ shift and go to state 60 ]
+  ! NE              [ shift and go to state 61 ]
+  ! MOD             [ shift and go to state 62 ]
+  ! AND             [ shift and go to state 63 ]
+  ! OR              [ shift and go to state 64 ]
+
+
+state 101
+
+    (53) exp -> ID ( opt_actual_args . )
+
+    )               shift and go to state 113
+
+
+state 102
+
+    (54) exp -> ( exp ) .
+
+    +               reduce using rule 54 (exp -> ( exp ) .)
+    -               reduce using rule 54 (exp -> ( exp ) .)
+    *               reduce using rule 54 (exp -> ( exp ) .)
+    /               reduce using rule 54 (exp -> ( exp ) .)
+    EQ              reduce using rule 54 (exp -> ( exp ) .)
+    LE              reduce using rule 54 (exp -> ( exp ) .)
+    GE              reduce using rule 54 (exp -> ( exp ) .)
+    LT              reduce using rule 54 (exp -> ( exp ) .)
+    GT              reduce using rule 54 (exp -> ( exp ) .)
+    NE              reduce using rule 54 (exp -> ( exp ) .)
+    MOD             reduce using rule 54 (exp -> ( exp ) .)
+    AND             reduce using rule 54 (exp -> ( exp ) .)
+    OR              reduce using rule 54 (exp -> ( exp ) .)
+    ;               reduce using rule 54 (exp -> ( exp ) .)
+    VOID_TYPE       reduce using rule 54 (exp -> ( exp ) .)
+    PRINT           reduce using rule 54 (exp -> ( exp ) .)
+    ID              reduce using rule 54 (exp -> ( exp ) .)
+    RETURN          reduce using rule 54 (exp -> ( exp ) .)
+    WHILE           reduce using rule 54 (exp -> ( exp ) .)
+    IF              reduce using rule 54 (exp -> ( exp ) .)
+    {               reduce using rule 54 (exp -> ( exp ) .)
+    INTEGER_TYPE    reduce using rule 54 (exp -> ( exp ) .)
+    DOUBLE_TYPE     reduce using rule 54 (exp -> ( exp ) .)
+    STRING_TYPE     reduce using rule 54 (exp -> ( exp ) .)
+    $end            reduce using rule 54 (exp -> ( exp ) .)
+    }               reduce using rule 54 (exp -> ( exp ) .)
+    ELSE            reduce using rule 54 (exp -> ( exp ) .)
+    ,               reduce using rule 54 (exp -> ( exp ) .)
+    )               reduce using rule 54 (exp -> ( exp ) .)
+    ]               reduce using rule 54 (exp -> ( exp ) .)
+
+
+state 103
+
+    (11) stmt -> WHILE ( exp ) . stmt
+    (4) stmt -> . VOID_TYPE ID ( opt_formal_args ) stmt
+    (5) stmt -> . data_type ID ( opt_formal_args ) stmt
+    (6) stmt -> . data_type ID opt_init opt_semi
+    (7) stmt -> . storable = exp opt_semi
+    (8) stmt -> . PRINT exp opt_semi
+    (9) stmt -> . ID ( opt_actual_args ) opt_semi
+    (10) stmt -> . RETURN opt_exp opt_semi
+    (11) stmt -> . WHILE ( exp ) stmt
+    (12) stmt -> . IF ( exp ) stmt opt_else
+    (13) stmt -> . { stmt_list }
+    (14) data_type -> . primitive_type
+    (15) data_type -> . primitive_type [ INTEGER ]
+    (57) storable -> . ID
+    (58) storable -> . ID [ exp ]
+    (16) primitive_type -> . INTEGER_TYPE
+    (17) primitive_type -> . DOUBLE_TYPE
+    (18) primitive_type -> . STRING_TYPE
+
+    VOID_TYPE       shift and go to state 5
+    PRINT           shift and go to state 9
+    ID              shift and go to state 6
+    RETURN          shift and go to state 10
+    WHILE           shift and go to state 11
+    IF              shift and go to state 12
+    {               shift and go to state 13
+    INTEGER_TYPE    shift and go to state 15
+    DOUBLE_TYPE     shift and go to state 16
+    STRING_TYPE     shift and go to state 17
+
+    stmt                           shift and go to state 114
+    data_type                      shift and go to state 7
+    storable                       shift and go to state 8
+    primitive_type                 shift and go to state 14
+
+state 104
+
+    (12) stmt -> IF ( exp ) . stmt opt_else
+    (4) stmt -> . VOID_TYPE ID ( opt_formal_args ) stmt
+    (5) stmt -> . data_type ID ( opt_formal_args ) stmt
+    (6) stmt -> . data_type ID opt_init opt_semi
+    (7) stmt -> . storable = exp opt_semi
+    (8) stmt -> . PRINT exp opt_semi
+    (9) stmt -> . ID ( opt_actual_args ) opt_semi
+    (10) stmt -> . RETURN opt_exp opt_semi
+    (11) stmt -> . WHILE ( exp ) stmt
+    (12) stmt -> . IF ( exp ) stmt opt_else
+    (13) stmt -> . { stmt_list }
+    (14) data_type -> . primitive_type
+    (15) data_type -> . primitive_type [ INTEGER ]
+    (57) storable -> . ID
+    (58) storable -> . ID [ exp ]
+    (16) primitive_type -> . INTEGER_TYPE
+    (17) primitive_type -> . DOUBLE_TYPE
+    (18) primitive_type -> . STRING_TYPE
+
+    VOID_TYPE       shift and go to state 5
+    PRINT           shift and go to state 9
+    ID              shift and go to state 6
+    RETURN          shift and go to state 10
+    WHILE           shift and go to state 11
+    IF              shift and go to state 12
+    {               shift and go to state 13
+    INTEGER_TYPE    shift and go to state 15
+    DOUBLE_TYPE     shift and go to state 16
+    STRING_TYPE     shift and go to state 17
+
+    stmt                           shift and go to state 115
+    data_type                      shift and go to state 7
+    storable                       shift and go to state 8
+    primitive_type                 shift and go to state 14
+
+state 105
+
+    (15) data_type -> primitive_type [ INTEGER ] .
+
+    ID              reduce using rule 15 (data_type -> primitive_type [ INTEGER ] .)
+
+
+state 106
+
+    (4) stmt -> VOID_TYPE ID ( opt_formal_args ) . stmt
+    (4) stmt -> . VOID_TYPE ID ( opt_formal_args ) stmt
+    (5) stmt -> . data_type ID ( opt_formal_args ) stmt
+    (6) stmt -> . data_type ID opt_init opt_semi
+    (7) stmt -> . storable = exp opt_semi
+    (8) stmt -> . PRINT exp opt_semi
+    (9) stmt -> . ID ( opt_actual_args ) opt_semi
+    (10) stmt -> . RETURN opt_exp opt_semi
+    (11) stmt -> . WHILE ( exp ) stmt
+    (12) stmt -> . IF ( exp ) stmt opt_else
+    (13) stmt -> . { stmt_list }
+    (14) data_type -> . primitive_type
+    (15) data_type -> . primitive_type [ INTEGER ]
+    (57) storable -> . ID
+    (58) storable -> . ID [ exp ]
+    (16) primitive_type -> . INTEGER_TYPE
+    (17) primitive_type -> . DOUBLE_TYPE
+    (18) primitive_type -> . STRING_TYPE
+
+    VOID_TYPE       shift and go to state 5
+    PRINT           shift and go to state 9
+    ID              shift and go to state 6
+    RETURN          shift and go to state 10
+    WHILE           shift and go to state 11
+    IF              shift and go to state 12
+    {               shift and go to state 13
+    INTEGER_TYPE    shift and go to state 15
+    DOUBLE_TYPE     shift and go to state 16
+    STRING_TYPE     shift and go to state 17
+
+    stmt                           shift and go to state 116
+    data_type                      shift and go to state 7
+    storable                       shift and go to state 8
+    primitive_type                 shift and go to state 14
+
+state 107
+
+    (21) formal_args -> data_type ID . , formal_args
+    (22) formal_args -> data_type ID .
+
+    ,               shift and go to state 117
+    )               reduce using rule 22 (formal_args -> data_type ID .)
+
+
+state 108
+
+    (9) stmt -> ID ( opt_actual_args ) opt_semi .
+
+    VOID_TYPE       reduce using rule 9 (stmt -> ID ( opt_actual_args ) opt_semi .)
+    PRINT           reduce using rule 9 (stmt -> ID ( opt_actual_args ) opt_semi .)
+    ID              reduce using rule 9 (stmt -> ID ( opt_actual_args ) opt_semi .)
+    RETURN          reduce using rule 9 (stmt -> ID ( opt_actual_args ) opt_semi .)
+    WHILE           reduce using rule 9 (stmt -> ID ( opt_actual_args ) opt_semi .)
+    IF              reduce using rule 9 (stmt -> ID ( opt_actual_args ) opt_semi .)
+    {               reduce using rule 9 (stmt -> ID ( opt_actual_args ) opt_semi .)
+    INTEGER_TYPE    reduce using rule 9 (stmt -> ID ( opt_actual_args ) opt_semi .)
+    DOUBLE_TYPE     reduce using rule 9 (stmt -> ID ( opt_actual_args ) opt_semi .)
+    STRING_TYPE     reduce using rule 9 (stmt -> ID ( opt_actual_args ) opt_semi .)
+    $end            reduce using rule 9 (stmt -> ID ( opt_actual_args ) opt_semi .)
+    }               reduce using rule 9 (stmt -> ID ( opt_actual_args ) opt_semi .)
+    ELSE            reduce using rule 9 (stmt -> ID ( opt_actual_args ) opt_semi .)
+
+
+state 109
+
+    (30) actual_args -> exp , actual_args .
+
+    )               reduce using rule 30 (actual_args -> exp , actual_args .)
+
+
+state 110
+
+    (5) stmt -> data_type ID ( opt_formal_args ) . stmt
+    (4) stmt -> . VOID_TYPE ID ( opt_formal_args ) stmt
+    (5) stmt -> . data_type ID ( opt_formal_args ) stmt
+    (6) stmt -> . data_type ID opt_init opt_semi
+    (7) stmt -> . storable = exp opt_semi
+    (8) stmt -> . PRINT exp opt_semi
+    (9) stmt -> . ID ( opt_actual_args ) opt_semi
+    (10) stmt -> . RETURN opt_exp opt_semi
+    (11) stmt -> . WHILE ( exp ) stmt
+    (12) stmt -> . IF ( exp ) stmt opt_else
+    (13) stmt -> . { stmt_list }
+    (14) data_type -> . primitive_type
+    (15) data_type -> . primitive_type [ INTEGER ]
+    (57) storable -> . ID
+    (58) storable -> . ID [ exp ]
+    (16) primitive_type -> . INTEGER_TYPE
+    (17) primitive_type -> . DOUBLE_TYPE
+    (18) primitive_type -> . STRING_TYPE
+
+    VOID_TYPE       shift and go to state 5
+    PRINT           shift and go to state 9
+    ID              shift and go to state 6
+    RETURN          shift and go to state 10
+    WHILE           shift and go to state 11
+    IF              shift and go to state 12
+    {               shift and go to state 13
+    INTEGER_TYPE    shift and go to state 15
+    DOUBLE_TYPE     shift and go to state 16
+    STRING_TYPE     shift and go to state 17
+
+    data_type                      shift and go to state 7
+    stmt                           shift and go to state 118
+    storable                       shift and go to state 8
+    primitive_type                 shift and go to state 14
+
+state 111
+
+    (24) opt_init -> = { exp_list . }
+
+    }               shift and go to state 119
+
+
+state 112
+
+    (26) exp_list -> exp . , exp_list
+    (27) exp_list -> exp .
+    (36) exp -> exp . + exp
+    (37) exp -> exp . - exp
+    (38) exp -> exp . * exp
+    (39) exp -> exp . / exp
+    (40) exp -> exp . EQ exp
+    (41) exp -> exp . LE exp
+    (42) exp -> exp . GE exp
+    (43) exp -> exp . LT exp
+    (44) exp -> exp . GT exp
+    (45) exp -> exp . NE exp
+    (46) exp -> exp . MOD exp
+    (47) exp -> exp . AND exp
+    (48) exp -> exp . OR exp
+
+    ,               shift and go to state 120
+    }               reduce using rule 27 (exp_list -> exp .)
+    +               shift and go to state 52
+    -               shift and go to state 53
+    *               shift and go to state 54
+    /               shift and go to state 55
+    EQ              shift and go to state 56
+    LE              shift and go to state 57
+    GE              shift and go to state 58
+    LT              shift and go to state 59
+    GT              shift and go to state 60
+    NE              shift and go to state 61
+    MOD             shift and go to state 62
+    AND             shift and go to state 63
+    OR              shift and go to state 64
+
+
+state 113
+
+    (53) exp -> ID ( opt_actual_args ) .
+
+    +               reduce using rule 53 (exp -> ID ( opt_actual_args ) .)
+    -               reduce using rule 53 (exp -> ID ( opt_actual_args ) .)
+    *               reduce using rule 53 (exp -> ID ( opt_actual_args ) .)
+    /               reduce using rule 53 (exp -> ID ( opt_actual_args ) .)
+    EQ              reduce using rule 53 (exp -> ID ( opt_actual_args ) .)
+    LE              reduce using rule 53 (exp -> ID ( opt_actual_args ) .)
+    GE              reduce using rule 53 (exp -> ID ( opt_actual_args ) .)
+    LT              reduce using rule 53 (exp -> ID ( opt_actual_args ) .)
+    GT              reduce using rule 53 (exp -> ID ( opt_actual_args ) .)
+    NE              reduce using rule 53 (exp -> ID ( opt_actual_args ) .)
+    MOD             reduce using rule 53 (exp -> ID ( opt_actual_args ) .)
+    AND             reduce using rule 53 (exp -> ID ( opt_actual_args ) .)
+    OR              reduce using rule 53 (exp -> ID ( opt_actual_args ) .)
+    ;               reduce using rule 53 (exp -> ID ( opt_actual_args ) .)
+    VOID_TYPE       reduce using rule 53 (exp -> ID ( opt_actual_args ) .)
+    PRINT           reduce using rule 53 (exp -> ID ( opt_actual_args ) .)
+    ID              reduce using rule 53 (exp -> ID ( opt_actual_args ) .)
+    RETURN          reduce using rule 53 (exp -> ID ( opt_actual_args ) .)
+    WHILE           reduce using rule 53 (exp -> ID ( opt_actual_args ) .)
+    IF              reduce using rule 53 (exp -> ID ( opt_actual_args ) .)
+    {               reduce using rule 53 (exp -> ID ( opt_actual_args ) .)
+    INTEGER_TYPE    reduce using rule 53 (exp -> ID ( opt_actual_args ) .)
+    DOUBLE_TYPE     reduce using rule 53 (exp -> ID ( opt_actual_args ) .)
+    STRING_TYPE     reduce using rule 53 (exp -> ID ( opt_actual_args ) .)
+    $end            reduce using rule 53 (exp -> ID ( opt_actual_args ) .)
+    }               reduce using rule 53 (exp -> ID ( opt_actual_args ) .)
+    ELSE            reduce using rule 53 (exp -> ID ( opt_actual_args ) .)
+    ,               reduce using rule 53 (exp -> ID ( opt_actual_args ) .)
+    )               reduce using rule 53 (exp -> ID ( opt_actual_args ) .)
+    ]               reduce using rule 53 (exp -> ID ( opt_actual_args ) .)
+
+
+state 114
+
+    (11) stmt -> WHILE ( exp ) stmt .
+
+    VOID_TYPE       reduce using rule 11 (stmt -> WHILE ( exp ) stmt .)
+    PRINT           reduce using rule 11 (stmt -> WHILE ( exp ) stmt .)
+    ID              reduce using rule 11 (stmt -> WHILE ( exp ) stmt .)
+    RETURN          reduce using rule 11 (stmt -> WHILE ( exp ) stmt .)
+    WHILE           reduce using rule 11 (stmt -> WHILE ( exp ) stmt .)
+    IF              reduce using rule 11 (stmt -> WHILE ( exp ) stmt .)
+    {               reduce using rule 11 (stmt -> WHILE ( exp ) stmt .)
+    INTEGER_TYPE    reduce using rule 11 (stmt -> WHILE ( exp ) stmt .)
+    DOUBLE_TYPE     reduce using rule 11 (stmt -> WHILE ( exp ) stmt .)
+    STRING_TYPE     reduce using rule 11 (stmt -> WHILE ( exp ) stmt .)
+    $end            reduce using rule 11 (stmt -> WHILE ( exp ) stmt .)
+    }               reduce using rule 11 (stmt -> WHILE ( exp ) stmt .)
+    ELSE            reduce using rule 11 (stmt -> WHILE ( exp ) stmt .)
+
+
+state 115
+
+    (12) stmt -> IF ( exp ) stmt . opt_else
+    (34) opt_else -> . ELSE stmt
+    (35) opt_else -> . empty
+    (61) empty -> .
+
+  ! shift/reduce conflict for ELSE resolved as shift
+    ELSE            shift and go to state 122
+    VOID_TYPE       reduce using rule 61 (empty -> .)
+    PRINT           reduce using rule 61 (empty -> .)
+    ID              reduce using rule 61 (empty -> .)
+    RETURN          reduce using rule 61 (empty -> .)
+    WHILE           reduce using rule 61 (empty -> .)
+    IF              reduce using rule 61 (empty -> .)
+    {               reduce using rule 61 (empty -> .)
+    INTEGER_TYPE    reduce using rule 61 (empty -> .)
+    DOUBLE_TYPE     reduce using rule 61 (empty -> .)
+    STRING_TYPE     reduce using rule 61 (empty -> .)
+    $end            reduce using rule 61 (empty -> .)
+    }               reduce using rule 61 (empty -> .)
+
+  ! ELSE            [ reduce using rule 61 (empty -> .) ]
+
+    opt_else                       shift and go to state 121
+    empty                          shift and go to state 123
+
+state 116
+
+    (4) stmt -> VOID_TYPE ID ( opt_formal_args ) stmt .
+
+    VOID_TYPE       reduce using rule 4 (stmt -> VOID_TYPE ID ( opt_formal_args ) stmt .)
+    PRINT           reduce using rule 4 (stmt -> VOID_TYPE ID ( opt_formal_args ) stmt .)
+    ID              reduce using rule 4 (stmt -> VOID_TYPE ID ( opt_formal_args ) stmt .)
+    RETURN          reduce using rule 4 (stmt -> VOID_TYPE ID ( opt_formal_args ) stmt .)
+    WHILE           reduce using rule 4 (stmt -> VOID_TYPE ID ( opt_formal_args ) stmt .)
+    IF              reduce using rule 4 (stmt -> VOID_TYPE ID ( opt_formal_args ) stmt .)
+    {               reduce using rule 4 (stmt -> VOID_TYPE ID ( opt_formal_args ) stmt .)
+    INTEGER_TYPE    reduce using rule 4 (stmt -> VOID_TYPE ID ( opt_formal_args ) stmt .)
+    DOUBLE_TYPE     reduce using rule 4 (stmt -> VOID_TYPE ID ( opt_formal_args ) stmt .)
+    STRING_TYPE     reduce using rule 4 (stmt -> VOID_TYPE ID ( opt_formal_args ) stmt .)
+    $end            reduce using rule 4 (stmt -> VOID_TYPE ID ( opt_formal_args ) stmt .)
+    }               reduce using rule 4 (stmt -> VOID_TYPE ID ( opt_formal_args ) stmt .)
+    ELSE            reduce using rule 4 (stmt -> VOID_TYPE ID ( opt_formal_args ) stmt .)
+
+
+state 117
+
+    (21) formal_args -> data_type ID , . formal_args
+    (21) formal_args -> . data_type ID , formal_args
+    (22) formal_args -> . data_type ID
+    (14) data_type -> . primitive_type
+    (15) data_type -> . primitive_type [ INTEGER ]
+    (16) primitive_type -> . INTEGER_TYPE
+    (17) primitive_type -> . DOUBLE_TYPE
+    (18) primitive_type -> . STRING_TYPE
+
+    INTEGER_TYPE    shift and go to state 15
+    DOUBLE_TYPE     shift and go to state 16
+    STRING_TYPE     shift and go to state 17
+
+    data_type                      shift and go to state 79
+    formal_args                    shift and go to state 124
+    primitive_type                 shift and go to state 14
+
+state 118
+
+    (5) stmt -> data_type ID ( opt_formal_args ) stmt .
+
+    VOID_TYPE       reduce using rule 5 (stmt -> data_type ID ( opt_formal_args ) stmt .)
+    PRINT           reduce using rule 5 (stmt -> data_type ID ( opt_formal_args ) stmt .)
+    ID              reduce using rule 5 (stmt -> data_type ID ( opt_formal_args ) stmt .)
+    RETURN          reduce using rule 5 (stmt -> data_type ID ( opt_formal_args ) stmt .)
+    WHILE           reduce using rule 5 (stmt -> data_type ID ( opt_formal_args ) stmt .)
+    IF              reduce using rule 5 (stmt -> data_type ID ( opt_formal_args ) stmt .)
+    {               reduce using rule 5 (stmt -> data_type ID ( opt_formal_args ) stmt .)
+    INTEGER_TYPE    reduce using rule 5 (stmt -> data_type ID ( opt_formal_args ) stmt .)
+    DOUBLE_TYPE     reduce using rule 5 (stmt -> data_type ID ( opt_formal_args ) stmt .)
+    STRING_TYPE     reduce using rule 5 (stmt -> data_type ID ( opt_formal_args ) stmt .)
+    $end            reduce using rule 5 (stmt -> data_type ID ( opt_formal_args ) stmt .)
+    }               reduce using rule 5 (stmt -> data_type ID ( opt_formal_args ) stmt .)
+    ELSE            reduce using rule 5 (stmt -> data_type ID ( opt_formal_args ) stmt .)
+
+
+state 119
+
+    (24) opt_init -> = { exp_list } .
+
+    ;               reduce using rule 24 (opt_init -> = { exp_list } .)
+    VOID_TYPE       reduce using rule 24 (opt_init -> = { exp_list } .)
+    PRINT           reduce using rule 24 (opt_init -> = { exp_list } .)
+    ID              reduce using rule 24 (opt_init -> = { exp_list } .)
+    RETURN          reduce using rule 24 (opt_init -> = { exp_list } .)
+    WHILE           reduce using rule 24 (opt_init -> = { exp_list } .)
+    IF              reduce using rule 24 (opt_init -> = { exp_list } .)
+    {               reduce using rule 24 (opt_init -> = { exp_list } .)
+    INTEGER_TYPE    reduce using rule 24 (opt_init -> = { exp_list } .)
+    DOUBLE_TYPE     reduce using rule 24 (opt_init -> = { exp_list } .)
+    STRING_TYPE     reduce using rule 24 (opt_init -> = { exp_list } .)
+    $end            reduce using rule 24 (opt_init -> = { exp_list } .)
+    }               reduce using rule 24 (opt_init -> = { exp_list } .)
+    ELSE            reduce using rule 24 (opt_init -> = { exp_list } .)
+
+
+state 120
+
+    (26) exp_list -> exp , . exp_list
+    (26) exp_list -> . exp , exp_list
+    (27) exp_list -> . exp
+    (36) exp -> . exp + exp
+    (37) exp -> . exp - exp
+    (38) exp -> . exp * exp
+    (39) exp -> . exp / exp
+    (40) exp -> . exp EQ exp
+    (41) exp -> . exp LE exp
+    (42) exp -> . exp GE exp
+    (43) exp -> . exp LT exp
+    (44) exp -> . exp GT exp
+    (45) exp -> . exp NE exp
+    (46) exp -> . exp MOD exp
+    (47) exp -> . exp AND exp
+    (48) exp -> . exp OR exp
+    (49) exp -> . INTEGER
+    (50) exp -> . DOUBLE
+    (51) exp -> . STRING
+    (52) exp -> . storable
+    (53) exp -> . ID ( opt_actual_args )
+    (54) exp -> . ( exp )
+    (55) exp -> . - exp
+    (56) exp -> . NOT exp
+    (57) storable -> . ID
+    (58) storable -> . ID [ exp ]
+
+    INTEGER         shift and go to state 26
+    DOUBLE          shift and go to state 27
+    STRING          shift and go to state 28
+    ID              shift and go to state 30
+    (               shift and go to state 31
+    -               shift and go to state 25
+    NOT             shift and go to state 32
+
+    exp                            shift and go to state 112
+    exp_list                       shift and go to state 125
+    storable                       shift and go to state 29
+
+state 121
+
+    (12) stmt -> IF ( exp ) stmt opt_else .
+
+    VOID_TYPE       reduce using rule 12 (stmt -> IF ( exp ) stmt opt_else .)
+    PRINT           reduce using rule 12 (stmt -> IF ( exp ) stmt opt_else .)
+    ID              reduce using rule 12 (stmt -> IF ( exp ) stmt opt_else .)
+    RETURN          reduce using rule 12 (stmt -> IF ( exp ) stmt opt_else .)
+    WHILE           reduce using rule 12 (stmt -> IF ( exp ) stmt opt_else .)
+    IF              reduce using rule 12 (stmt -> IF ( exp ) stmt opt_else .)
+    {               reduce using rule 12 (stmt -> IF ( exp ) stmt opt_else .)
+    INTEGER_TYPE    reduce using rule 12 (stmt -> IF ( exp ) stmt opt_else .)
+    DOUBLE_TYPE     reduce using rule 12 (stmt -> IF ( exp ) stmt opt_else .)
+    STRING_TYPE     reduce using rule 12 (stmt -> IF ( exp ) stmt opt_else .)
+    $end            reduce using rule 12 (stmt -> IF ( exp ) stmt opt_else .)
+    }               reduce using rule 12 (stmt -> IF ( exp ) stmt opt_else .)
+    ELSE            reduce using rule 12 (stmt -> IF ( exp ) stmt opt_else .)
+
+
+state 122
+
+    (34) opt_else -> ELSE . stmt
+    (4) stmt -> . VOID_TYPE ID ( opt_formal_args ) stmt
+    (5) stmt -> . data_type ID ( opt_formal_args ) stmt
+    (6) stmt -> . data_type ID opt_init opt_semi
+    (7) stmt -> . storable = exp opt_semi
+    (8) stmt -> . PRINT exp opt_semi
+    (9) stmt -> . ID ( opt_actual_args ) opt_semi
+    (10) stmt -> . RETURN opt_exp opt_semi
+    (11) stmt -> . WHILE ( exp ) stmt
+    (12) stmt -> . IF ( exp ) stmt opt_else
+    (13) stmt -> . { stmt_list }
+    (14) data_type -> . primitive_type
+    (15) data_type -> . primitive_type [ INTEGER ]
+    (57) storable -> . ID
+    (58) storable -> . ID [ exp ]
+    (16) primitive_type -> . INTEGER_TYPE
+    (17) primitive_type -> . DOUBLE_TYPE
+    (18) primitive_type -> . STRING_TYPE
+
+    VOID_TYPE       shift and go to state 5
+    PRINT           shift and go to state 9
+    ID              shift and go to state 6
+    RETURN          shift and go to state 10
+    WHILE           shift and go to state 11
+    IF              shift and go to state 12
+    {               shift and go to state 13
+    INTEGER_TYPE    shift and go to state 15
+    DOUBLE_TYPE     shift and go to state 16
+    STRING_TYPE     shift and go to state 17
+
+    stmt                           shift and go to state 126
+    data_type                      shift and go to state 7
+    storable                       shift and go to state 8
+    primitive_type                 shift and go to state 14
+
+state 123
+
+    (35) opt_else -> empty .
+
+    VOID_TYPE       reduce using rule 35 (opt_else -> empty .)
+    PRINT           reduce using rule 35 (opt_else -> empty .)
+    ID              reduce using rule 35 (opt_else -> empty .)
+    RETURN          reduce using rule 35 (opt_else -> empty .)
+    WHILE           reduce using rule 35 (opt_else -> empty .)
+    IF              reduce using rule 35 (opt_else -> empty .)
+    {               reduce using rule 35 (opt_else -> empty .)
+    INTEGER_TYPE    reduce using rule 35 (opt_else -> empty .)
+    DOUBLE_TYPE     reduce using rule 35 (opt_else -> empty .)
+    STRING_TYPE     reduce using rule 35 (opt_else -> empty .)
+    $end            reduce using rule 35 (opt_else -> empty .)
+    }               reduce using rule 35 (opt_else -> empty .)
+    ELSE            reduce using rule 35 (opt_else -> empty .)
+
+
+state 124
+
+    (21) formal_args -> data_type ID , formal_args .
+
+    )               reduce using rule 21 (formal_args -> data_type ID , formal_args .)
+
+
+state 125
+
+    (26) exp_list -> exp , exp_list .
+
+    }               reduce using rule 26 (exp_list -> exp , exp_list .)
+
+
+state 126
+
+    (34) opt_else -> ELSE stmt .
+
+    VOID_TYPE       reduce using rule 34 (opt_else -> ELSE stmt .)
+    PRINT           reduce using rule 34 (opt_else -> ELSE stmt .)
+    ID              reduce using rule 34 (opt_else -> ELSE stmt .)
+    RETURN          reduce using rule 34 (opt_else -> ELSE stmt .)
+    WHILE           reduce using rule 34 (opt_else -> ELSE stmt .)
+    IF              reduce using rule 34 (opt_else -> ELSE stmt .)
+    {               reduce using rule 34 (opt_else -> ELSE stmt .)
+    INTEGER_TYPE    reduce using rule 34 (opt_else -> ELSE stmt .)
+    DOUBLE_TYPE     reduce using rule 34 (opt_else -> ELSE stmt .)
+    STRING_TYPE     reduce using rule 34 (opt_else -> ELSE stmt .)
+    $end            reduce using rule 34 (opt_else -> ELSE stmt .)
+    }               reduce using rule 34 (opt_else -> ELSE stmt .)
+    ELSE            reduce using rule 34 (opt_else -> ELSE stmt .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for ID in state 10 resolved as shift
+WARNING: shift/reduce conflict for + in state 98 resolved as shift
+WARNING: shift/reduce conflict for - in state 98 resolved as shift
+WARNING: shift/reduce conflict for * in state 98 resolved as shift
+WARNING: shift/reduce conflict for / in state 98 resolved as shift
+WARNING: shift/reduce conflict for EQ in state 98 resolved as shift
+WARNING: shift/reduce conflict for LE in state 98 resolved as shift
+WARNING: shift/reduce conflict for GE in state 98 resolved as shift
+WARNING: shift/reduce conflict for LT in state 98 resolved as shift
+WARNING: shift/reduce conflict for GT in state 98 resolved as shift
+WARNING: shift/reduce conflict for NE in state 98 resolved as shift
+WARNING: shift/reduce conflict for MOD in state 98 resolved as shift
+WARNING: shift/reduce conflict for AND in state 98 resolved as shift
+WARNING: shift/reduce conflict for OR in state 98 resolved as shift
+WARNING: shift/reduce conflict for ELSE in state 115 resolved as shift
