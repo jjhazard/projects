@@ -1,0 +1,314 @@
+﻿John Best
+Jesse Hazard
+A3 - Locality 
+2/22/2020
+Description:
+
+
+*Due: 3/2/2020
+Part B Design-pgm Checklist:
+1. Components and their interfaces.
+Interfaces: 
+        a2methods.h : used to store an image in blocks or rows 
+ : used to map functions to an image 
+        a2plain.h   : enables a2methods to use uarray2.h
+        a2blocked.h : enables a2methods to use uarray2b.h
+ 
+Components:
+ppmtrans.c  : reads a ppm image and transposes it
+
+
+2. Architecture:
+ppmtrans reads the input arguments and the correct 2d array is selected. 
+Once determined, uses the a2methods interface to select and create the appropriate a2methods type.
+Once done, it reads the ppm image file directly into the selected array type using the pnm interface.
+After the image is stored, pnmtrans performs the selected operation on the image by creating a new array
+and copying data to it using transformation algebra provided in the project specification.
+
+
+
+
+    3. Invariants:
+    - Once read, the copied array of elements, and it's structure will
+not be altered
+    - Once read, the methods used to translate the image will not be altered.
+    - Once read the dimensions of the new array will not be altered.
+    - While copying, elements that have completed copying will not be altered.
+    
+    4. Tests:
+    - Can get an image.
+    - Can choose correct a2methods.
+    - Can create new array with correct dimensions.
+    - Can translate array elements correctly into a new array.   
+
+
+    5. Why it works: for array of length (w, h):
+   * 90deg rotation elements are copied from (a,b) to (h-b-1,a).
+   * 180deg rotation elements are copied from (a,b) to 
+(w-a-1, h-b-1).
+
+
+
+________________
+
+
+
+
+
+
+
+
+Part A Design-adt Checklist:
+
+      1. What is the abstract thing you are trying to represent?
+      1. An unboxed, 2D array called Array2b that uses blocking to improve locality. Cells in each block are located near each other in memory, and mapping is done by block instead of row/column. The blocks along the right side and bottom of the array may contain empty/unused cells. 
+
+         2. What functions will you offer, and what are the contracts that those functions must meet?
+     It is a CRE to pass a NULL UArray2b_T to any function. 
+
+
+UArray2b_T UArray2b_new(int width, int height, 
+                                int size, int blocksize); 
+- Creates a new UArray2b
+- If size or blocksize < 1, CRE
+- If width or height < 0, CRE
+- If width or height == 0, no blocks are allocated
+
+UArray2b_T UArray2b_new_64K_block(int width, int height, int size);
+        - Creates new UArray2b with blocksize of 64KB (if possible).
+- If size or blocksize < 1, CRE
+- If width or height < 0, CRE
+- If width or height == 0, no blocks are allocated
+
+void UArray2b_map(        UArray2b_T array2b,
+   apply(int i, int j, UArray2B_T array2b, void* elem, void* cl),
+                        void* cl); 
+        - Mapping function visits every cell in one block before
+        moving onto another, and does not visit unused cells. 
+        - If uarray2b is NULL, CRE
+
+int UArray2b_blocksize(UArray2b_T array2b); 
+        - Returns the size of one block
+- If uarray2b is NULL, CRE 
+        
+int UArray2b_size(UArray2b_T array2b); 
+        - Returns the size of an array element (cell).
+        - If uarray2b is NULL, CRE
+
+int UArray2b_width(UArray2b_T array2b); 
+        - Returns the number of columns in the array.
+        - If uarray2b is NULL, CRE
+
+int UArray2b_height(UArray2b_T array2b); 
+        - Returns the number of rows in the array. 
+        - If uarray2b is NULL, CRE
+
+void *Array2b_at(UArray2b_T array2b, int i, int j); 
+        - Returns a pointer element at (i, j) 
+        - If uarray2b is NULL, CRE 
+        - If i or j out of bounds, CRE
+
+void Array2b_free(UArray2b_T* array2b); 
+        - Frees all allocated memory. 
+        - If the UArray2b_T pointer array2b is NULL, CRE
+        - If the UArray2b_T pointed to is NULL, CRE
+
+         3. What examples do you have of what the functions are supposed to do?
+//array2b is a new UArray2b_T object of blockwidth 10
+UArray2b_T array2b = UArray2b_new(400,400,8,10); 
+
+//array2b is a new UArray2b_T object with a blockwidth of
+// (int)sqrt(64000/size) + 1 
+UArray2b_T array2b = UArray2b_new_64K_block(1000, 1000, 8);
+
+//to map function someFunc to each element in the array
+UArray2b_map(uarray2b, someFunc, void* cl);
+
+
+//to get the blocksize of a UArray2b_T
+int blocksize = UArray2b_blocksize(uarray2b); 
+
+//to get the size of a UArray2b_T
+int size = UArray2b_size(UArray2b uarray2b); 
+
+//to get the width of a UArray2b_T
+int width = UArray2b_width(UArray2b uarray2b); 
+
+//to get the height of a UArray2b_T
+int height = UArray2b_height(UArray2b uarray2b); 
+
+//to get a pointer to an element in a UArray2b_T
+void* elem = Array2b_at(uarray2b, row, col); 
+
+//to free a Uarray2b_T
+Array2b_free(uarray2b); 
+
+________________
+
+
+         4. * What representation will you use, and what invariants will it satisfy?
+-        How you will translate cell coordinates(i, j)into a C
+        pointer in your representation.
+-        How you will translate a location within your representation
+        back to pixel coordinates(i, j).
+-        Representation used for a single block.
+-        Representation used for a 2D array of blocks.
+
+
+Representation:
+The representation for our data is a 2d array of 2d subarrays. Each of the subarrays forms a block of close memory. The blocksize is the width of a block, such that the total memory in a block is blocksize*blocksize*size. Each 2d array is physically represented as a 1d array. To simulate the 2d structure, we treat index i*width as the start of the ith row. 
+
+
+Invariants:
+The 2d array is always going to have the given height and width and will always store elements of the original size in blocks of the original blocksize.
+When given a coordinate (i, j), we use integer division and the number of blocks in a row to find the block as follows:
+blockWidth*i/blocksize + j/blocksize
+To get the coordinate inside the block, we use mod and blocksize:
+blocksize*i/blocksize + j/blocksize.
+
+
+All members (below) defined in the UArray2b struct are invariants; we expect their values to remain the same until the array is freed. 
+  
+  struct UArray2b {
+int width, height;        // width and height of array. 
+int size;                        // size in bytes of an array element.
+        int blockSize;                // size of one array block.
+int blockWidth, blockHeight;        // # blocks wide and tall.
+        int edgeWidth, edgeHeight;                // true width and height
+                                                        //   from origin.
+        Array2_T *blocks;                        // 2D array of blocks.
+}
+
+
+
+            5. * When a representation satisfies all invariants, what abstract thing from (step 1?) does it represent? 
+An unboxed 2d array.
+
+            6. What test cases have you devised?
+All test cases will use map functions to store and print image data.
+            * Image with height or width of 0
+            * Image with height or width:
+            * Of 0
+            * Of exactly blocksize
+            * Of exactly blocksize + 1
+            * Of exactly blocksize - 1
+            * 1.1x the other
+            * 1.2x the other
+            * 1.3x the other
+            * 1.5x the other
+            * 2x the other
+
+
+
+            7. What programming idioms will you need?
+            1. Reading/writing from/to standard input/output.
+Using unboxed, multi-dimensional arrays. 
+Allocating / freeing memory. 
+
+
+END PART A
+________________
+
+
+
+
+
+
+
+
+Part C Design-pgm Checklist:
+
+               1. Components and their interfaces.
+Interfaces:
+        pnm.h          : used to read the ppm image
+        array.h         : used by store a contiguous set of data
+        uarray2.h   : used to store a 2d grid of data in rows
+        uarray2b.h  : used to store a 2d grid of data in blocks 
+        a2methods.h : used to store an image in blocks or rows 
+ : used to map functions to an image 
+        a2plain.h   : enables a2methods to use uarray2.h
+        a2blocked.h : enables a2methods to use uarray2b.h
+ 
+Components:
+ppmtrans.c  : reads a ppm image and transposes it
+
+
+               2. Architecture.
+ppmtrans reads the input arguments and determines if a uarray2 or uarray2b is requested, otherwise selects uarray2. Once determined, uses the a2methods interface to select and create the appropriate a2methods type. Once done, it reads the ppm image file directly into the selected array type using the pnm interface.
+After the image is stored, pnmtrans performs the selected operation on the image by creating a new array and copying data to it using transformation algebra.
+
+
+               3. Invariants. 
+Once read, the image will not be altered other than a simple rotation or flip.
+The new image dimensions and member information may invert height and width, but will otherwise remain the same.
+The pixels may be remapped, but will have the same relational positions.
+No other attributes of the image will change.
+
+
+                  4. We’ve tested to make sure the algorithm math works and analyzed the correlation between operations, storage, and the cache. There are two conditions under which we specifically use the row mapping method:
+                  1. if it is requested
+                  2. if 64000/size < width and 180 degree turn or flip.
+Otherwise we default to block storage. The reason it’s better is because we can map full blocks of memory through the cache rather than having to worry about countless cache misses.
+
+
+                  5. Explanation of why it works.
+For an image (w * h):
+For 90deg rotations: 
+        Rows map to columns, and vice versa. 
+        Pixel(a, b) becomes Pixel(h - b - 1, a)
+For 180deg rotations:
+        Rows map to rows, columns map to columns.
+        Pixel(a, b) becomes(w - a - 1, h - b - 1)
+
+
+END PART C
+________________
+
+
+
+
+
+
+
+
+*Due: 3/2/2020
+Part B Design-pgm Checklist:
+                     3. Components and their interfaces.
+Interfaces: 
+        a2methods.h : used to store an image in blocks or rows 
+ : used to map functions to an image 
+        a2plain.h   : enables a2methods to use uarray2.h
+        a2blocked.h : enables a2methods to use uarray2b.h
+ 
+Components:
+ppmtrans.c  : reads a ppm image and transposes it
+
+
+                     4. Architecture:
+ppmtrans reads the input arguments and the correct 2d array is selected. 
+Once determined, uses the a2methods interface to select and create the appropriate a2methods type.
+Once done, it reads the ppm image file directly into the selected array type using the pnm interface.
+After the image is stored, pnmtrans performs the selected operation on the image by creating a new array
+and copying data to it using transformation algebra provided in the project specification.
+
+
+
+
+    3. Invariants:
+    - Once read, the copied array of elements, and it's structure will
+not be altered
+    - Once read, the methods used to translate the image will not be altered.
+    - Once read the dimensions of the new array will not be altered.
+    - While copying, elements that have completed copying will not be altered.
+    
+    4. Tests:
+    - Can get an image.
+    - Can choose correct a2methods.
+    - Can create new array with correct dimensions.
+    - Can translate array elements correctly into a new array.   
+
+
+    5. Why it works: for array of length (w, h):
+                        * 90deg rotation elements are copied from (a,b) to (h-b-1,a).
+                        * 180deg rotation elements are copied from (a,b) to 
+(w-a-1, h-b-1).
